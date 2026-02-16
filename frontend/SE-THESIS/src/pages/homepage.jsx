@@ -26,15 +26,15 @@ export default function HomePage() {
     <div className="w-screen h-screen font-montserrat bg-[#E4E3E1] p-10 flex items-end justify-center overflow-hidden">
       <section className="absolute w-[30%] h-fit flex flex-row gap-6 top-[2vw] left-[3vw]">
         <div className="flex flex-col gap-6">
-          <div className="w-28 aspect-square bg-[#ABAAA9] flex flex-col p-4 items-start justify-between rounded-2xl shadow-inner-neumorphic">
+          <div className="w-28 aspect-square bg-[#ABAAA9] flex flex-col p-4 items-start justify-between rounded-2xl shadow-inner-neumorphic hover:scale-105 hover:bg-[#b1b1b1] transition-transform duration-300 cursor-pointer">
             <img src={Bulb} alt="Bulb Icon" className="w-9 aspect-square" />
             <p className="text-subtitle text-[#E4E3E1]">Smart</p>
           </div>
-          <div className="w-28 aspect-square bg-[#ABAAA9] flex flex-col p-4 items-start justify-between rounded-2xl shadow-inner-neumorphic">
+          <div className="w-28 aspect-square bg-[#ABAAA9] flex flex-col p-4 items-start justify-between rounded-2xl shadow-inner-neumorphic hover:scale-105 hover:bg-[#b1b1b1] transition-transform duration-300 cursor-pointer">
             <img src={Target} alt="Bulb Icon" className="w-9 aspect-square" />
             <p className="text-subtitle text-[#E4E3E1]">Detect</p>
           </div>
-          <div className="w-28 aspect-square bg-[#ABAAA9] flex flex-col p-4 items-start justify-between rounded-2xl shadow-inner-neumorphic">
+          <div className="w-28 aspect-square bg-[#ABAAA9] flex flex-col p-4 items-start justify-between rounded-2xl shadow-inner-neumorphic hover:scale-105 hover:bg-[#b1b1b1] transition-transform duration-300 cursor-pointer">
             <img src={Copy} alt="Bulb Icon" className="w-9 aspect-square" />
             <p className="text-subtitle text-[#E4E3E1]">Adapt</p>
           </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import LoadingPage from "../components/pages/loadingPage.jsx";
 import HomePage from "../pages/homepage.jsx";
 import SignUpPage from "../auth/signUpPage.jsx";
@@ -8,15 +8,16 @@ import LoginPage from "../auth/loginPage.jsx";
 import PageTransitions from "../components/common/pageTransitions.jsx";
 
 export default function AppRoutes() {
-  const [serverStatus, setServerStatus] = useState("offline");
-  const [backendStatus, setBackendStatus] = useState("offline");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const hasChecked = useRef(false);
-  const SERVER_HEALTH = import.meta.env.SERVER_HEALTH
-  const BACKEND_HEALTH = import.meta.env.BACKEND_HEALTH;
+  const SERVER_HEALTH = import.meta.env.VITE_SERVER_HEALTH;
+  const BACKEND_HEALTH = import.meta.env.VITE_BACKEND_HEALTH;
 
   useEffect(() => {
+    let interval;
+
     const checkServerStatus = async () => {
       try {
         const [serverRes, backendRes] = await Promise.all([
@@ -24,25 +25,32 @@ export default function AppRoutes() {
           fetch(BACKEND_HEALTH),
         ]);
 
+        console.log("Server Health Response:", serverRes.ok);
+        console.log("Backend Health Response:", backendRes.ok);
+
         if (serverRes.ok && backendRes.ok) {
-          setServerStatus("Online");
-          setBackendStatus("Online");
-          navigate("/home"); 
+          hasChecked.current = true;
+          clearInterval(interval);
+          if (location.pathname === "/") {
+            navigate("/home");
+          }
         } else {
-          setServerStatus("Offline");
-          setBackendStatus("Offline");
-          navigate("/");
+          if (location.pathname !== "/") {
+            navigate("/");
+          }
         }
       } catch (error) {
-        setServerStatus("Offline");
-        setBackendStatus("Offline");
+        if (location.pathname !== "/") {
+          navigate("/");
+        }
       }
     };
 
-    if (!hasChecked.current) {
-      checkServerStatus();
-      hasChecked.current = true; // mark as done
-    }
+    interval = setInterval(checkServerStatus, 3000);
+
+    checkServerStatus();
+
+    return () => clearInterval(interval);
   }, [navigate]);
 
   return (
