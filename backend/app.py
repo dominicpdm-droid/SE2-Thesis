@@ -22,12 +22,31 @@ path where the annotated image is saved after object detection.
 """
 
 @app.get("/detect")
-def detect_objects(image_path: str):
-    results = model(image_path)
-    annotated_frame = results[0].plot()
-    output_path = "./results/annotated_image.jpg"
-    cv2.imwrite(output_path, annotated_frame)
-    return {"message": "Detection complete", "output_path": output_path}
+async def detect_objects(image_path: str):
+    try:
+        contents = await file.read()
+        np_array = np.frombuffer(contents, np.uint8)
+        image = cv2.imdecode(np_array, cv2.IMREAD_COLOR)
+        
+        if image is None:
+            return {"error": "Invalid image file"}
+        
+        results = model(image)
+        
+        count = 0
+        for box in results[0].boxes:
+            class_id = int(box.cls[0])
+            class_name = model.names[class_id]
+            
+            if class_name == "person":
+                count += 1
+
+        output_path = "./results/annotated_image.jpg"
+        cv2.imwrite(output_path, image)
+        return {"message": "Detection complete", "count": count, "output_path": output_path}
+
+    except Exception as e:
+        return {"error": str(e)}
 
 @app.get("/health")
 def health_check():

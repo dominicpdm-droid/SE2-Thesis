@@ -1,8 +1,8 @@
 import { useLayoutEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import { gsap } from "gsap";
 
-export default function PageTransitions({ children }) {
+export default function PageTransitions() {
   const location = useLocation();
   const containerRef = useRef(null);
 
@@ -11,9 +11,7 @@ export default function PageTransitions({ children }) {
 
     gsap.set(el, { opacity: 0 });
 
-    const tl = gsap.timeline();
-
-    tl.to(el, {
+    gsap.to(el, {
       opacity: 1,
       duration: 1.2,
       ease: "circ.out",
@@ -21,8 +19,8 @@ export default function PageTransitions({ children }) {
   }, [location]);
 
   return (
-    <div key={location.pathname} ref={containerRef}>
-      {children}
+    <div ref={containerRef}>
+      <Outlet />
     </div>
   );
 }

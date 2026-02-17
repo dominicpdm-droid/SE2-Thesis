@@ -4,8 +4,12 @@ import LoadingPage from "../components/pages/loadingPage.jsx";
 import HomePage from "../pages/homepage.jsx";
 import SignUpPage from "../auth/signUpPage.jsx";
 import LoginPage from "../auth/loginPage.jsx";
+import DashboardPage from "../pages/dashboardPage.jsx";
+import ActivityPage from "../pages/activityPage.jsx";
+import Layout from "../components/layouts/layout.jsx";
+import DevelopmentPage from "../components/pages/developmentPage.jsx";
 
-import PageTransitions from "../components/common/pageTransitions.jsx";
+import PageTransitions from "../components/animations/pageTransitions.jsx";
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -32,7 +36,7 @@ export default function AppRoutes() {
           hasChecked.current = true;
           clearInterval(interval);
           if (location.pathname === "/") {
-            navigate("/home");
+            navigate("/iris");
           }
         } else {
           if (location.pathname !== "/") {
@@ -54,13 +58,17 @@ export default function AppRoutes() {
   }, [navigate]);
 
   return (
-    <PageTransitions>
-      <Routes>
+      <Routes element={<PageTransitions />}>
         <Route path="/" element={<LoadingPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/iris" element={<HomePage />} />
+        <Route path="/iris/login" element={<LoginPage />} />
+        <Route path="/iris/signup" element={<SignUpPage />} />
+        
+        <Route path="iris" element={<Layout />}>
+          <Route path="/iris/home" element={<DashboardPage />} />
+          <Route path="/iris/activity" element={<ActivityPage />} />
+          <Route path="/iris/development" element={<DevelopmentPage />} />
+        </Route>
       </Routes>
-    </PageTransitions>
   );
 }

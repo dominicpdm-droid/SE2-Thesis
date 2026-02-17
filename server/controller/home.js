@@ -9,14 +9,28 @@ const home = (req, res) => {
 
 const getPeopleCount = async (req, res) => {
   try {
-    const response = await axios.get("http://localhost:8000/detect", {
-      params: {
-        image_path: imagePath
-      },
+    if (!req.file) {
+      return res.status(400).json({ error: "No image file uploaded" });
+    }
+
+    const formData = new FormData();
+    formData.append("file", req.file.buffer, {
+      filename: "frame.jpg",
+      contentType: req.file.mimetype,
     });
-    res.status(200).json(response.data);
+
+    const response = await axios.post(
+      "http://localhost:8000/detect", 
+      formData, 
+      {
+        headers: formData.getHeaders(),
+      }
+    );
+
+    res.status(200).json({ response: response.data });
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch people count data" });
+    console.error(error);
+    res.status(500).json({ error: "Failed to process image" });
   }
 };
 

@@ -7,7 +7,7 @@ export default function LoadingPage() {
     <div className="w-screen h-screen font-montserrat bg-[#E4E3E1] p-10 flex items-end justify-center overflow-hidden">
       <div className="absolute left-[7vw] bottom-[5vw] flex flex-row gap-4 items-center">
         <span class="loader"></span>
-        <h1 className="font-montserrat font-bold text-[#858585] text-subheader">
+        <h1 className="font-montserrat font-bold text-[#858585] text-title">
           Intelligent Room Interaction System
         </h1>
       </div>
