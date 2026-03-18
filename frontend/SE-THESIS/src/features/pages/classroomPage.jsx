@@ -12,6 +12,7 @@ import { socket } from "../../shared/services/socketService.js";
 export default function classroomPage() {
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
+  console.log(rooms);
   socket.on("connect", () => console.log("Socket connected!", socket.id));
 
   const {
@@ -54,9 +55,9 @@ export default function classroomPage() {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-
+  
+  // TODO: Make this an independent shared component
   useEffect(() => {
-    // Fetch initial rooms
     const fetchRooms = async () => {
       try {
         const roomsData = await getRooms();

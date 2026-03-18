@@ -687,3 +687,30 @@
 {"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Room 104: With status code 201","method":"POST","timestamp":"2026-03-18 09:29:49"}
 {"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Room 105: With status code 201","method":"POST","timestamp":"2026-03-18 09:29:51"}
 {"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Room 106: With status code 201","method":"POST","timestamp":"2026-03-18 09:29:53"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Room 107: With status code 201","method":"POST","timestamp":"2026-03-18 09:32:25"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Room 108: With status code 201","method":"POST","timestamp":"2026-03-18 09:32:26"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Room 109: With status code 201","method":"POST","timestamp":"2026-03-18 09:32:28"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Room 110: With status code 201","method":"POST","timestamp":"2026-03-18 09:32:32"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:34:08"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:34:10"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:37:53"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:38:03"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:38:11"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:38:24"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:39:36"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:39:38"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:40:02"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:40:12"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:40:21"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:40:24"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:40:28"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:40:33"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:40:34"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:41:15"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:41:17"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:42:05"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:42:06"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:42:21"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:44:19"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:44:29"}
+{"ip":"::1","level":"info","message":"AUTH FIRSTLOGIN -- LotharKlaue checked: is_firsttime = true","method":"GET","timestamp":"2026-03-18 09:44:35"}

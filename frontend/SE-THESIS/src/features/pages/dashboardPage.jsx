@@ -2,10 +2,15 @@
 import { useState, useEffect } from "react";
 // !Componenets
 import { checkFirstTime } from "../../shared/services/authService";
+import { socket } from "../../shared/services/socketService.js";
+import { getRooms } from "../../shared/services/roomService.js";
 
 export default function dashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showGuide, setShowGuide] = useState(false);
+  const [rooms, setRooms] = useState([]);
+  const emptyRooms = rooms.filter((room) => room.room_occupants > 0).length;
+  socket.on("connect", () => console.log("Socket connected!", socket.id));
 
   useEffect(() => {
     const fetchFirstTime = async () => {
@@ -21,7 +26,25 @@ export default function dashboard() {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-    return () => clearInterval(timer);
+    const fetchRooms = async () => {
+      try {
+        const roomsData = await getRooms();
+        setRooms(roomsData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchRooms();
+
+    // Listen for new rooms in real-time
+    const handleNewRoom = (room) => setRooms((prev) => [...prev, room]);
+    socket.on("roomAdded", handleNewRoom);
+
+    return () => {
+      socket.off("roomAdded", handleNewRoom);
+      clearInterval(timer);
+    };
   }, []);
 
   return (
@@ -46,11 +69,15 @@ export default function dashboard() {
         <div className="relative w-full h-[30vh] flex flex-row items-center justify-start gap-6 font-bold">
           <div className="flex flex-col items-start gap-4 primary-text">
             <h2 className="text-title">Occupied Rooms</h2>
-            <div className="w-[20vw] aspect-video rounded-2xl shadow-outside-dropshadow"></div>
+            <div className="w-[20vw] aspect-video rounded-2xl shadow-outside-dropshadow flex justify-center items-center text-header">
+              {emptyRooms}
+            </div>
           </div>
           <div className="flex flex-col items-start gap-4 primary-text">
             <h2 className="text-title">Vacant Rooms</h2>
-            <div className="w-[20vw] aspect-video rounded-2xl shadow-outside-dropshadow"></div>
+            <div className="w-[20vw] aspect-video rounded-2xl shadow-outside-dropshadow flex justify-center items-center text-header">
+              {rooms.length}
+            </div>
           </div>
           <div className="flex flex-col w-full h-full items-start gap-4 primary-text">
             <h2 className="text-title">Activity History</h2>
