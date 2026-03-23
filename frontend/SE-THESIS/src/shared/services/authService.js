@@ -22,6 +22,16 @@ export const loginUser = async (userData) => {
     throw error;
   }
 };
+export const fetchUser = async (token) => {
+    try {
+      const response = await axiosClient.get("/auth/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data
+    } catch (error) {
+      throw error;
+    }
+  };
 
 export const checkFirstTime = async () => {
   try {

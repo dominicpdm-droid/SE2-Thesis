@@ -63,7 +63,9 @@ exports.getRooms = async (req, res, next) => {
     const rooms = await Room.find({
       room_owner: req.userID,
     }).populate("room_owner", "first_name");
-    console.log("ROOMS:", room)
+    logger.info({
+      message: `ROOMS FETCHED -- ${rooms}`
+    })
 
     res.status(200).json(rooms);
   } catch (error) {

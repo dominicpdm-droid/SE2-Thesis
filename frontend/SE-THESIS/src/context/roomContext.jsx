@@ -6,21 +6,29 @@ const RoomContext = createContext();
 
 export const RoomProvider = ({ children }) => {
   const [rooms, setRooms] = useState([]);
+  const token = localStorage.getItem("token");
+
+  const resetRooms = () => {
+    setRooms([]);
+  };
+
+  const fetchRooms = async () => {
+    try {
+      const data = await getRooms();
+      setRooms(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
-    const fetchRooms = async () => {
-      try {
-        const data = await getRooms();
-        setRooms(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
     fetchRooms();
-
     const handleNewRoom = (room) => {
-      setRooms((prev) => [...prev, room]);
+      setRooms((prev) => {
+        const exists = prev.some((r) => r._id === room._id);
+        if (exists) return prev;
+        return [...prev, room];
+      });
     };
 
     socket.on("roomAdded", handleNewRoom);
@@ -31,7 +39,7 @@ export const RoomProvider = ({ children }) => {
   }, []);
 
   return (
-    <RoomContext.Provider value={{ rooms, setRooms }}>
+    <RoomContext.Provider value={{ rooms, setRooms, fetchRooms, resetRooms }}>
       {children}
     </RoomContext.Provider>
   );

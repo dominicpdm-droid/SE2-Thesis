@@ -4,10 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 // !Componenets
 import { loginUser } from "../../shared/services/authService.js";
+import { useAuth } from "../../context/authContext.jsx";
 import SlideUp from "../../shared/components/animations/slideUp.jsx";
 import { useServerStatus } from "../../context/serverStatusContext.jsx";
 import { handleServerDown } from "../../shared/utils/serverDownHandler.js";
 import { Toaster } from "../../shared/components/ui/sonner.js";
+import { socket } from "../../shared/services/socketService.js";
+import { getRooms } from "../../shared/services/roomService.js";
+import { useRooms } from "../../context/roomContext.jsx";
 // !Assets
 import { CircleAlert } from "lucide-react";
 import { toast } from "sonner";
@@ -19,8 +23,10 @@ import Logo from "@/assets/icons/logo.png";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { fetchRooms } = useRooms()
   const { isServerUp, setIsServerUp } = useServerStatus();
   const [loginError, setLoginError] = useState("");
+  const { login } = useAuth();
 
   // ?We declare what funciton of react-form-hook we gon use here
   const {
@@ -66,7 +72,9 @@ export default function LoginPage() {
 
       toast.success(res.message);
       localStorage.setItem("token", res.token);
-      console.log("TOKEN:", res.token)
+      console.log("TOKEN:", res.token);
+      socket.connect()
+      fetchRooms();
       navigate("/iris/home");
     } catch (error) {
       // ?Sends the error to server handler to check if its a server_down error
@@ -78,6 +86,8 @@ export default function LoginPage() {
       resetField("password");
     }
   };
+
+
   return (
     <div className="w-screen h-screen font-montserrat flex-col gap-9 bg-[#E4E3E1] p-10 flex items-center justify-center overflow-hidden">
       <SlideUp duration={0.7}>

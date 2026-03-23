@@ -21,7 +21,7 @@ const requestLimiter = rateLimit({
     // *When you reach the limit of 5 request consecutively, youll be 
     // *locked 15 minutes before being able to send another request
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 100,
   message: {
     status: 429,
     message: "Too many request, please try again after 15 minutes",
@@ -46,6 +46,7 @@ app.use("/server/home", HomeRouter);
 //* We implement that requestLimiter here
 app.use("/auth/register", requestLimiter);
 app.use("/auth/login", requestLimiter);
+app.use("/auth/me", requestLimiter);
 app.use("/auth", AuthRouter);
 
 app.use("/room/create", requestLimiter);

@@ -23,7 +23,12 @@ exports.registerUser = async (req, res) => {
         method: req.method,
         ip: req.ip,
       });
-      return res.status(400).json({ message: "The user with this email already exist. Try logging in to your account." });
+      return res
+        .status(400)
+        .json({
+          message:
+            "The user with this email already exist. Try logging in to your account.",
+        });
     }
     // Hashes the password
     const salt = await bcrypt.genSalt(10);
@@ -66,10 +71,10 @@ exports.loginUser = async (req, res) => {
     // use na through out the website. So this basically prevents constant user request sa database since
     // naka token naman na. And then yeah same send lang status code. Then i added a new function which is
     // yung logger. Self explanatory nayon. Better development practice nalang yon.
-
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
+    console.log(user);
     if (!user) {
       logger.error({
         message: `AUTH LOGIN -- User ${user.email} could not be found with status code (400)`,
@@ -112,18 +117,43 @@ exports.loginUser = async (req, res) => {
       method: req.method,
       ip: req.ip,
     });
+    res.status(500).json({
+      message:
+        "The login information is incorrect. Ensure that you enter correct email and password",
+    });
+  }
+};
+
+exports.userData = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.userID).select(
+      "first_name last_name is_authorized is_firsttime",
+    );
+    logger.info({
+      message: `AUTH USERDATA -- ${user.first_name} data requested from frontend: Accepted`,
+      method: req.method,
+      ip: req.ip,
+    });
+    res.json(user);
+  } catch (error) {
     res
       .status(500)
       .json({
-        message:
-          "The login information is incorrect. Ensure that you enter correct email and password",
+        message: "It seems like there was a problem connecting to server",
       });
+    logger.error({
+      message: `AUTH USERDATA -- ${error.message} with status code (500)`,
+      method: req.method,
+      ip: req.ip,
+    });
   }
 };
 
 exports.isFirstTime = async (req, res, next) => {
   try {
-    const user = await User.findById(req.userID).select("first_name is_firsttime");
+    const user = await User.findById(req.userID).select(
+      "first_name is_firsttime",
+    );
     logger.info({
       message: `AUTH FIRSTLOGIN -- ${user.first_name} checked: is_firsttime = ${user.is_firsttime}`,
       method: req.method,
@@ -131,11 +161,15 @@ exports.isFirstTime = async (req, res, next) => {
     });
     res.json(user);
   } catch (error) {
-    res.status(500).json({ message:"It seems like there was a problem connecting to server" })
+    res
+      .status(500)
+      .json({
+        message: "It seems like there was a problem connecting to server",
+      });
     logger.error({
       message: `AUTH FIRSTLOGIN -- ${error.message} with status code (500)`,
       method: req.method,
       ip: req.ip,
     });
   }
-}
+};

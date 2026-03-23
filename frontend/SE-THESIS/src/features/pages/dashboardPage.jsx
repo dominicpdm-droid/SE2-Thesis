@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // !Componenets
 import { checkFirstTime } from "../../shared/services/authService";
 import { socket } from "../../shared/services/socketService.js";
-import { getRooms } from "../../shared/services/roomService.js";
+// import { getRooms } from "../../shared/services/roomService.js";
 import { useRooms } from "../../context/roomContext.jsx";
 
 export default function dashboard() {
@@ -12,8 +12,9 @@ export default function dashboard() {
   const { rooms } = useRooms();
   const emptyRooms = rooms.filter((room) => room.room_occupants > 0).length;
   socket.on("connect", () => console.log("Socket connected!", socket.id));
-
+  
   useEffect(() => {
+    // getRooms();
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);

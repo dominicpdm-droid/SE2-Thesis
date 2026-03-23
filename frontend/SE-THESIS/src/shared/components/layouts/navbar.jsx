@@ -7,18 +7,17 @@ import Notif from "@/assets/icons/notif.png";
 import Dev from "@/assets/icons/dev.png";
 import Ex from "@/assets/icons/ex.png";
 
-import { logoutUser } from "../../utils/logoutHandler";
+import { useAuth } from "../../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { useRooms } from "../../../context/roomContext";
+import { socket } from "../../services/socketService";
 import { toast } from "sonner";
 import SlideRight from "../animations/slideRight";
 
 export default function Navbar() {
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    toast.success("Logged out successfully!");
-    logoutUser(navigate);
-  };
+  const { resetRooms } = useRooms();
+  const { logout } = useAuth();
 
   return (
     <SlideRight>
@@ -65,7 +64,7 @@ export default function Navbar() {
           </div>
         </SlideRight>
         <button
-          onClick={handleLogout}
+          onClick={() => {logout(), resetRooms()}}
           className="w-full aspect-square bg-[#E4E3E1] rounded-full flex items-center shadow-outside-dropshadow-small justify-center cursor-pointer hover:scale-102 hover:bg-[#d4d3d1] transition-transform duration-300 tooltip"
         >
           <img src={Ex} alt="Notifications" />
