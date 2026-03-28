@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, ChevronLeft } from "lucide-react";
+import { X, ChevronLeft, Trash2, ToggleLeft, ToggleRight } from "lucide-react";
 import Dialog from "@mui/material/Dialog";
 import Switch from "@mui/material/Switch";
 import Paper from "@mui/material/Paper";
@@ -7,8 +7,11 @@ import { styled } from "@mui/material/styles";
 import Draggable from "react-draggable";
 import Small_Logo from "@/assets/images/small_logo.png";
 import { addCamera, getDevice } from "../../services/deviceService";
+import { deleteRoom } from "../../services/roomService";
 import { handleServerDown } from "../../utils/serverDownHandler";
 import { useServerStatus } from "../../../context/serverStatusContext";
+import { useActivity } from "../../../context/activityContext";
+import { useDeviceState } from "../../../context/deviceStateContext";
 import { useNavigate } from "react-router-dom";
 import { Toaster } from "../../components/ui/sonner";
 import { useCamera } from "../../../context/cameraContext";
@@ -28,16 +31,31 @@ function PaperComponent(props) {
   );
 }
 
-export default function ViewClassroom({ open, onClose, roomId, roomName }) {
+export default function ViewClassroom({ open, onClose, roomId, roomName, onRoomDeleted }) {
   const navigate = useNavigate();
   const { isServerUp, setIsServerUp } = useServerStatus();
+  const { addActivity } = useActivity();
+  const { getDeviceState, setDeviceState } = useDeviceState();
   const [selectedCamera, setSelectedCamera] = useState(null);
+  const [lightsOn, setLightsOn] = useState(false);
+  const [fansOn, setFansOn] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const videoRef = useRef(null);
   const [cameras, setCameras] = useState([]);
   const [openDevices, setOpenDevices] = useState(false);
   const streamRef = useRef(null);
   const { startCamera } = useCamera();
   const { getStream } = useCamera();
+
+  // Load device states from context when modal opens
+  useEffect(() => {
+    if (open && roomId) {
+      const { lightsOn: savedLightsOn, fansOn: savedFansOn } =
+        getDeviceState(roomId);
+      setLightsOn(savedLightsOn);
+      setFansOn(savedFansOn);
+    }
+  }, [open, roomId, getDeviceState]);
 
   useEffect(() => {
     async function initCameras() {
@@ -147,6 +165,54 @@ export default function ViewClassroom({ open, onClose, roomId, roomName }) {
     setOpenDevices(false);
   };
 
+  const handleRemoveClassroom = async () => {
+    // Show confirmation dialog
+    const confirmDelete = window.confirm(
+      `Are you sure you want to remove "${roomName}"? This action cannot be undone.`
+    );
+
+    if (!confirmDelete) return;
+
+    setIsDeleting(true);
+
+    try {
+      await deleteRoom(roomId);
+      
+      if (onRoomDeleted) {
+        onRoomDeleted(roomId);
+      }
+      
+      addActivity(`Classroom "${roomName}" has been removed`, "success");
+      toast.success("Classroom removed successfully");
+      onClose();
+    } catch (error) {
+      setIsDeleting(false);
+      
+      if (handleServerDown(error, setIsServerUp, navigate)) return;
+      
+      const message = error.response?.data?.message || "Failed to remove classroom";
+      toast.error(message);
+    }
+  };
+
+  const toggleLights = () => {
+    const newState = !lightsOn;
+    setLightsOn(newState);
+    setDeviceState(roomId, newState, fansOn);
+    const action = newState ? "turned on" : "turned off";
+    addActivity(`Lights in "${roomName}" have been ${action}`, "info");
+    toast.success(newState ? "Lights turned on" : "Lights turned off");
+  };
+
+  const toggleFans = () => {
+    const newState = !fansOn;
+    setFansOn(newState);
+    setDeviceState(roomId, lightsOn, newState);
+    const action = newState ? "turned on" : "turned off";
+    addActivity(`Fans in "${roomName}" have been ${action}`, "info");
+    toast.success(newState ? "Fans turned on" : "Fans turned off");
+  };
+
   if (!open) return null;
 
   const ToggleSwitch = styled((props) => (
@@ -243,7 +309,7 @@ export default function ViewClassroom({ open, onClose, roomId, roomName }) {
             {/* Content area - blank for now */}
             <div className="flex w-full h-full flex-col gap-6 px-8 py-5 min-h-0">
               {/* Content will be added here */}
-              <div className="shadow-inner-neumorphic p-2 flex justify-center items-center w-full h-[65%] rounded-lg">
+              <div className="shadow-inner-neumorphic p-5 flex justify-center items-center w-full h-[65%] rounded-lg">
                 {selectedCamera ? (
                   <video
                     ref={videoRef}
@@ -256,13 +322,42 @@ export default function ViewClassroom({ open, onClose, roomId, roomName }) {
                 )}
               </div>
               <div className="shadow-inner-neumorphic flex flex-row p-5 gap-5 items-center justify-between w-full h-[15%] rounded-lg">
-                <button className="w-full text-subtitle primary-text shadow-black/40 shadow-md px-10 py-6 rounded-2xl cursor-pointer hover:bg-[#b1b1b1] hover:scale-101 transition-transform duration-300">
-                  Remove Classroom
+                <button
+                  onClick={handleRemoveClassroom}
+                  disabled={isDeleting}
+                  className="w-full text-subtitle primary-text shadow-black/40 shadow-md px-10 py-6 rounded-2xl cursor-pointer hover:bg-[#b1b1b1] hover:scale-101 transition-transform duration-300 flex items-center justify-center gap-3 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Trash2 size={20} />
+                  {isDeleting ? "Removing..." : "Remove Classroom"}
                 </button>
-                <button className="w-full text-subtitle primary-text shadow-black/40 shadow-md px-10 py-6 rounded-2xl cursor-pointer hover:bg-[#b1b1b1] hover:scale-101 transition-transform duration-300">
+                <button
+                  onClick={toggleLights}
+                  className={`w-full text-subtitle shadow-black/40 shadow-md px-10 py-6 rounded-2xl cursor-pointer hover:scale-101 transition-all duration-300 flex items-center justify-center gap-3 whitespace-nowrap ${
+                    lightsOn
+                      ? "bg-[#A1A2A6] text-black"
+                      : "primary-text hover:bg-[#b1b1b1]"
+                  }`}
+                >
+                  {lightsOn ? (
+                    <ToggleRight size={25} />
+                  ) : (
+                    <ToggleLeft size={25} />
+                  )}
                   Manual Lights
                 </button>
-                <button className="w-full text-subtitle primary-text shadow-black/40 shadow-md px-10 py-6 rounded-2xl cursor-pointer hover:bg-[#b1b1b1] hover:scale-101 transition-transform duration-300">
+                <button
+                  onClick={toggleFans}
+                  className={`w-full text-subtitle shadow-black/40 shadow-md px-10 py-6 rounded-2xl cursor-pointer hover:scale-101 transition-all duration-300 flex items-center justify-center gap-3 whitespace-nowrap ${
+                    fansOn
+                      ? "bg-[#A1A2A6] text-black"
+                      : "primary-text hover:bg-[#b1b1b1]"
+                  }`}
+                >
+                  {fansOn ? (
+                    <ToggleRight size={25} />
+                  ) : (
+                    <ToggleLeft size={25} />
+                  )}
                   Manual Fans
                 </button>
               </div>

@@ -140,3 +140,7 @@
 {"ip":"::ffff:127.0.0.1","level":"error","message":"DEVICE ADD -- device_locaiton is not defined","method":"POST","timestamp":"2026-03-26 23:39:04"}
 {"ip":"::ffff:127.0.0.1","level":"error","message":"DEVICE ADD -- device_locaiton is not defined","method":"POST","timestamp":"2026-03-26 23:39:05"}
 {"ip":"::ffff:127.0.0.1","level":"error","message":"DEVICE ADD -- Device.exist is not a function","method":"POST","timestamp":"2026-03-26 23:39:27"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:12:23"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:12:29"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:12:36"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:25:19"}

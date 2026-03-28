@@ -4,6 +4,7 @@ import Popover from "@mui/material/Popover";
 import { useForm } from "react-hook-form";
 import { handleServerDown } from "../../shared/utils/serverDownHandler.js";
 import { useServerStatus } from "../../context/serverStatusContext.jsx";
+import { useActivity } from "../../context/activityContext.jsx";
 import { toast } from "sonner";
 import { addRoom, getRooms } from "../../shared/services/roomService.js";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +17,8 @@ import ViewClassroom from "../../shared/components/ui/viewClassroom.jsx";
 
 export default function classroomPage() {
   const navigate = useNavigate();
-  const { rooms } = useRooms();
+  const { rooms, setRooms } = useRooms();
+  const { addActivity } = useActivity();
   const [kebabAnchorEl, setKebabAnchorEl] = useState(null);
   const [selectedRoomId, setSelectedRoomId] = useState(null);
   const [selectedRoomName, setSelectedRoomName] = useState(null);
@@ -42,6 +44,10 @@ export default function classroomPage() {
     setSelectedRoomId(roomId);
     setSelectedRoomName(roomName);
     setViewModalOpen(true);
+  };
+
+  const handleRoomDeleted = (deletedRoomId) => {
+    setRooms((prevRooms) => prevRooms.filter((room) => room._id !== deletedRoomId));
   };
 
   const handleKebabClick = (event, roomId, roomName) => {
@@ -70,6 +76,7 @@ export default function classroomPage() {
         room_name: data.cr_name,
       });
 
+      addActivity(`Classroom "${data.cr_name}" has been added`, "success");
       toast.success(res.message);
     } catch (error) {
       if (handleServerDown(error, setIsServerUp, navigate)) return;
@@ -213,6 +220,7 @@ export default function classroomPage() {
         onClose={() => setViewModalOpen(false)}
         roomId={selectedRoomId}
         roomName={selectedRoomName}
+        onRoomDeleted={handleRoomDeleted}
       />
     </div>
   );

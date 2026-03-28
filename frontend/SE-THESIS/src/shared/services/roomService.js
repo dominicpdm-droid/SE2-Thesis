@@ -40,3 +40,23 @@ export const getRooms = async () => {
     throw error;
   }
 };
+
+export const deleteRoom = async (roomId) => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("Unauthorized: Unknown user");
+    }
+
+    const response = await axiosClient.delete(`/room/${roomId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

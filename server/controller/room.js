@@ -76,3 +76,45 @@ exports.getRooms = async (req, res, next) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.deleteRoom = async (req, res, next) => {
+  try {
+    const { roomId } = req.params;
+
+    const room = await Room.findById(roomId);
+
+    if (!room) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+
+    // Verify that the user owns this room
+    if (room.room_owner.toString() !== req.userID) {
+      logger.error({
+        message: `ROOM DELETE -- Unauthorized deletion attempt by user ${req.userID}`,
+        method: req.method,
+        ip: req.ip,
+      });
+      return res.status(403).json({ message: "Unauthorized to delete this room" });
+    }
+
+    await Room.findByIdAndDelete(roomId);
+    
+    logger.info({
+      message: `ROOM DELETE -- Room deleted: ${room.room_name}`,
+      method: req.method,
+      ip: req.ip,
+    });
+
+    const io = getIO();
+    io.emit("roomDeleted", { roomId });
+
+    res.status(200).json({ message: "Room deleted successfully" });
+  } catch (error) {
+    logger.error({
+      message: `ROOM DELETE -- ${error.message}`,
+      method: req.method,
+      ip: req.ip,
+    });
+    res.status(500).json({ message: error.message });
+  }
+};

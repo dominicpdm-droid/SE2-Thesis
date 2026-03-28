@@ -26,6 +26,7 @@ export const RoomProvider = ({ children }) => {
 
   useEffect(() => {
     fetchRooms();
+    
     const handleNewRoom = (room) => {
       setRooms((prev) => {
         const exists = prev.some((r) => r._id === room._id);
@@ -34,10 +35,16 @@ export const RoomProvider = ({ children }) => {
       });
     };
 
+    const handleRoomDeleted = (data) => {
+      setRooms((prev) => prev.filter((room) => room._id !== data.roomId));
+    };
+
     socket.on("roomAdded", handleNewRoom);
+    socket.on("roomDeleted", handleRoomDeleted);
 
     return () => {
       socket.off("roomAdded", handleNewRoom);
+      socket.off("roomDeleted", handleRoomDeleted);
     };
   }, []);
 

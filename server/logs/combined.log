@@ -2129,3 +2129,105 @@
 {"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c476d071c8420b5af58584'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c7344c863db2028b3ca9f9'),\n  room_name: 'Sample Room2',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 11:59:27"}
 {"ip":"::1","level":"info","message":"AUTH USERDATA -- Triztan data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 12:16:02"}
 {"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c476d071c8420b5af58584'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c7344c863db2028b3ca9f9'),\n  room_name: 'Sample Room2',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 12:16:02"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-03-28 14:07:44"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-03-28 14:09:40"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-03-28 14:10:42"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 14:11:46"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 14:11:49"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 14:11:52"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 14:11:55"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 14:11:58"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 14:12:01"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 14:12:04"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 14:12:07"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:12:23"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:12:29"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:12:36"}
+{"ip":"::1","level":"info","message":"AUTH REGISTER -- Registered the user lamoba@gmail.com: With status code 201","method":"POST","timestamp":"2026-03-28 14:14:29"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email lamoba@gmail.com Login Succesfull","method":"POST","timestamp":"2026-03-28 14:14:40"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 14:14:40"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email lamoba@gmail.com Login Succesfull","method":"POST","timestamp":"2026-03-28 14:17:49"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 14:17:49"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:25:19"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email lamoba@gmail.com Login Succesfull","method":"POST","timestamp":"2026-03-28 14:34:48"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 14:34:48"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 14:42:56"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 14:42:56"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 14:43:00"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 14:43:00"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 14:49:10"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 14:49:10"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Malamanam: With status code 201","method":"POST","timestamp":"2026-03-28 14:51:11"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 14:51:15"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c77a5f817503a088feb04d'),\n  room_name: 'Malamanam',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 14:51:15"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:40:07"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c77a5f817503a088feb04d'),\n  room_name: 'Malamanam',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:40:07"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c77a5f817503a088feb04d'),\n  room_name: 'Malamanam',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:42:44"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:42:50"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c77a5f817503a088feb04d'),\n  room_name: 'Malamanam',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:42:50"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c77a5f817503a088feb04d'),\n  room_name: 'Malamanam',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:43:16"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-03-28 15:44:58"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-03-28 15:45:04"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-03-28 15:45:12"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:45:24"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c77a5f817503a088feb04d'),\n  room_name: 'Malamanam',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:45:24"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Malamanam","method":"DELETE","timestamp":"2026-03-28 15:45:26"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:45:35"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 15:45:36"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added malamanan: With status code 201","method":"POST","timestamp":"2026-03-28 15:45:46"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c7872a7ef3a65eb3e4307b'),\n  room_name: 'malamanan',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:45:51"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:45:51"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: malamanan","method":"DELETE","timestamp":"2026-03-28 15:45:58"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 15:48:26"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:48:26"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Malamanam: With status code 201","method":"POST","timestamp":"2026-03-28 15:48:35"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:48:37"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c787d37ef3a65eb3e43087'),\n  room_name: 'Malamanam',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:48:38"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Malamanam","method":"DELETE","timestamp":"2026-03-28 15:48:42"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:48:45"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 15:48:45"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:53:21"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 15:53:21"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Malamanam: With status code 201","method":"POST","timestamp":"2026-03-28 15:53:46"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:53:53"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c7890a7ef3a65eb3e43095'),\n  room_name: 'Malamanam',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:53:54"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:55:14"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c7890a7ef3a65eb3e43095'),\n  room_name: 'Malamanam',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:55:14"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added asdasdasdad: With status code 201","method":"POST","timestamp":"2026-03-28 15:55:21"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Malamanam","method":"DELETE","timestamp":"2026-03-28 15:56:02"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:56:06"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c789697ef3a65eb3e430a0'),\n  room_name: 'asdasdasdad',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:56:06"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: asdasdasdad","method":"DELETE","timestamp":"2026-03-28 15:56:11"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:57:27"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 15:57:27"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 15:57:57"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added RoomBerto: With status code 201","method":"POST","timestamp":"2026-03-28 15:58:08"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 15:58:11"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c78a107ef3a65eb3e430af'),\n  room_name: 'RoomBerto',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 15:58:12"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: RoomBerto","method":"DELETE","timestamp":"2026-03-28 15:58:17"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added RoomBerto: With status code 201","method":"POST","timestamp":"2026-03-28 16:01:09"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 16:01:14"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c78ac57ef3a65eb3e430b9'),\n  room_name: 'RoomBerto',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 16:01:14"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 16:03:15"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c78ac57ef3a65eb3e430b9'),\n  room_name: 'RoomBerto',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 16:03:16"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: RoomBerto","method":"DELETE","timestamp":"2026-03-28 16:09:40"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-03-28 16:16:33"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-03-28 18:21:49"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:21:56"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-03-28 18:21:56"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-03-28 18:21:56"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:21:59"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:22:02"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:22:05"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:22:08"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:22:11"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:22:14"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:22:17"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:22:20"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:22:23"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-03-28 18:22:26"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizXD123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-03-28 18:22:58"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c476d071c8420b5af58584'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c7344c863db2028b3ca9f9'),\n  room_name: 'Sample Room2',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-03-28 18:22:59"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Sample Room","method":"DELETE","timestamp":"2026-03-28 18:23:09"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Sample Room2","method":"DELETE","timestamp":"2026-03-28 18:23:27"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-03-28 18:26:46"}
