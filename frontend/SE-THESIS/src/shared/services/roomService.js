@@ -60,3 +60,25 @@ export const deleteRoom = async (roomId) => {
     throw error;
   }
 };
+
+export const detectFrame = async (formData) => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("Unauthorized: Unknown user");
+    }
+
+    const response = await axiosClient.post("/server/home/detect-room-frame", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        // do NOT set Content-Type manually
+      },
+      transformRequest: [(data) => data],
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

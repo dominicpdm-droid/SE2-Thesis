@@ -13,6 +13,20 @@ export default function DevelopmentPage() {
   useEffect(() => {
     let stream;
 
+    const startCamera = async () => {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false,
+        });
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (err) {
+        console.error("Error accessing camera: ", err);
+      }
+    };
+
     const CaptureFrame = () => {
       const video = videoRef.current;
       const canvas = canvasRef.current;

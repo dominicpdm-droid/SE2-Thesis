@@ -5,6 +5,8 @@ import { checkFirstTime } from "../../shared/services/authService";
 import { socket } from "../../shared/services/socketService.js";
 // import { getRooms } from "../../shared/services/roomService.js";
 import { useRooms } from "../../context/roomContext.jsx";
+import { useCamera } from "../../context/cameraContext.jsx";
+import { getDevice } from "../../shared/services/deviceService.js";
 
 export default function dashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -12,8 +14,88 @@ export default function dashboard() {
   const { rooms } = useRooms();
   const emptyRooms = rooms.filter((room) => room.room_occupants > 0).length;
   const vacantRoom = rooms.filter((room) => room.room_occupants === 0).length;
-  socket.on("connect", () => console.log("Socket connected!", socket.id));
+  const { startCamera, startFrameCapture } = useCamera();
+  const [availableCameras, setAvailableCameras] = useState([]);
+
+  useEffect(() => {
+    const handleConnect = () => console.log("Socket connected!", socket.id);
+
+    socket.on("connect", handleConnect);
+
+    return () => {
+      socket.off("connect", handleConnect);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!rooms.length || !availableCameras.length) return;
+
+    async function initializeAllRoomCameras() {
+      try {
+        for (const room of rooms) {
+          const devices = await getDevice(room._id);
+
+          if (!devices.length) {
+            console.log("No saved device for room:", room.room_name);
+            continue;
+          }
+
+          const savedDevice = devices[0];
+
+          const matchedCamera = availableCameras.find(
+            (cam) => cam.label === savedDevice.device_label,
+          );
+
+          if (!matchedCamera) {
+            console.warn(
+              "No matching browser camera for room:",
+              room.room_name,
+              savedDevice.device_label,
+            );
+            continue;
+          }
+
+          console.log(
+            "INITIALIZING CAMERA:",
+            room.room_name,
+            matchedCamera.label,
+          );
+
+          await startCamera(room._id, matchedCamera.deviceId);
+          startFrameCapture(room._id);
+        }
+      } catch (err) {
+        console.error("Error initializing room cameras:", err);
+      }
+    }
+
+    initializeAllRoomCameras();
+  }, [rooms, availableCameras]);
   
+  useEffect(() => {
+    async function loadAvailableCameras() {
+      try {
+        await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false,
+        });
+
+        const devices = await navigator.mediaDevices.enumerateDevices();
+
+        const videoInputs = devices.filter(
+          (device) => device.kind === "videoinput",
+        );
+
+        setAvailableCameras(videoInputs);
+        console.log("AVAILABLE CAMERAS:", videoInputs);
+      } catch (err) {
+        console.error("Error loading available cameras:", err);
+      }
+    }
+
+    loadAvailableCameras();
+  }, []);
+
   useEffect(() => {
     // getRooms();
     const timer = setInterval(() => {

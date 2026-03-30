@@ -18,21 +18,52 @@ const getPeopleCount = async (req, res) => {
 
     console.log("Received file:", req.file);
 
-
     const formData = new FormData();
     formData.append("file", req.file.buffer, {
       filename: "frame.jpg",
       contentType: req.file.mimetype,
     });
 
-    const response = await axios.post("http://localhost:8000/detect", formData, {
-      headers: formData.getHeaders(),
-    });
+    const response = await axios.post(
+      "http://localhost:8000/detect",
+      formData,
+      {
+        headers: formData.getHeaders(),
+      },
+    );
 
     res.status(200).json(response.data);
   } catch (error) {
-    console.error("Error in getPeopleCount:", error.response?.data || error.message);
+    console.error(
+      "Error in getPeopleCount:",
+      error.response?.data || error.message,
+    );
     res.status(500).json({ error: "Failed to process image" });
+  }
+};
+
+const detectRoomFrame = async (req, res) => {
+  try {
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+
+    const { roomId } = req.body;
+
+    if (!roomId) {
+      return res.status(400).json({ error: "roomId is required" });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ error: "No image file uploaded" });
+    }
+
+    return res.status(200).json({
+      message: "Frame received successfully",
+      roomId,
+    });
+  } catch (error) {
+    console.error("Error receiving frame:", error.message);
+    return res.status(500).json({ error: "Failed to receive frame" });
   }
 };
 
@@ -48,5 +79,6 @@ const getHealth = async (req, res) => {
 
 module.exports = {
   getPeopleCount,
+  detectRoomFrame,
   getHealth,
 };

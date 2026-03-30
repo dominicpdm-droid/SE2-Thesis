@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Draggable from "react-draggable";
 import Small_Logo from "@/assets/images/small_logo.png";
-import { addCamera, getDevice } from "../../services/deviceService";
+import { addCamera } from "../../services/deviceService";
 import { deleteRoom } from "../../services/roomService";
 import { handleServerDown } from "../../utils/serverDownHandler";
 import { useServerStatus } from "../../../context/serverStatusContext";
@@ -31,7 +31,13 @@ function PaperComponent(props) {
   );
 }
 
-export default function ViewClassroom({ open, onClose, roomId, roomName, onRoomDeleted }) {
+export default function ViewClassroom({
+  open,
+  onClose,
+  roomId,
+  roomName,
+  onRoomDeleted,
+}) {
   const navigate = useNavigate();
   const { isServerUp, setIsServerUp } = useServerStatus();
   const { addActivity } = useActivity();
@@ -44,10 +50,10 @@ export default function ViewClassroom({ open, onClose, roomId, roomName, onRoomD
   const [cameras, setCameras] = useState([]);
   const [openDevices, setOpenDevices] = useState(false);
   const streamRef = useRef(null);
-  const { startCamera } = useCamera();
   const { getStream } = useCamera();
 
-  // Load device states from context when modal opens
+  //! Load device states from context when modal opens
+  //! Bali ito yung for electronic devices
   useEffect(() => {
     if (open && roomId) {
       const { lightsOn: savedLightsOn, fansOn: savedFansOn } =
@@ -57,26 +63,40 @@ export default function ViewClassroom({ open, onClose, roomId, roomName, onRoomD
     }
   }, [open, roomId, getDeviceState]);
 
-  useEffect(() => {
-    async function initCameras() {
-      const devices = await getDevice(roomId);
+  //! This initializes the camera from the database
+  // useEffect(() => {
+  //   async function initCameras() {
+  //     const devices = await getDevice(roomId);
 
-      const savedDevice = devices[0];
+  //     const savedDevice = devices[0];
 
-      const matchedCamera = cameras.find(
-        (cam) => cam.groupId === savedDevice.device_group,
-      );
+  //     const matchedCamera = cameras.find(
+  //       (cam) => cam.label === savedDevice.device_label,
+  //     );
+  //     if (matchedCamera) {
+  //       console.log("MATCHED CAMERA FOUND:", matchedCamera);
 
-      if (matchedCamera) {
-        await startCamera(roomId, matchedCamera.deviceId);
-      }
-    }
+  //       setSelectedCamera(matchedCamera);
 
-    if (cameras.length) {
-      initCameras();
-    }
-  }, [roomId, cameras]);
+  //       await startCamera(roomId, matchedCamera.deviceId);
 
+  //       const stream = getStream(roomId);
+
+  //       if (videoRef.current && stream) {
+  //         videoRef.current.srcObject = stream;
+  //       }
+  //     } else {
+  //       console.warn("No matching camera found");
+  //     }
+  //   }
+
+  //   if (cameras.length) {
+  //     initCameras();
+  //   }
+  // }, [roomId, open, cameras, startCamera, getStream]);
+
+  //! This gets all the available cameras from the browser
+  //! and list them as options to connect to the classroom
   useEffect(() => {
     async function getCameras() {
       try {
@@ -97,16 +117,23 @@ export default function ViewClassroom({ open, onClose, roomId, roomName, onRoomD
     getCameras();
   }, []);
 
+  //! This updates the video feed whenever the selected camera changes or when the modal is opened
   useEffect(() => {
-    if (!open) return;
+    if (!open || !roomId || !videoRef.current) return;
 
     const stream = getStream(roomId);
 
-    if (videoRef.current && stream) {
-      videoRef.current.srcObject = stream;
-    }
-  }, [open, roomId]);
+    videoRef.current.srcObject = null;
 
+    if (stream) {
+      videoRef.current.srcObject = stream;
+      console.log("ATTACHED STREAM FOR ROOM:", roomId);
+    } else {
+      console.warn("No stream found for room:", roomId);
+    }
+  }, [roomId, open, getStream]);
+
+  //! This handles the camera stream whenever a new camera is selected
   // useEffect(() => {
   //   async function startCamera() {
   //     if (!selectedCamera) return;
@@ -142,6 +169,7 @@ export default function ViewClassroom({ open, onClose, roomId, roomName, onRoomD
   //   };
   // }, [selectedCamera]);
 
+  //! This handles adding the camera to the classroom in the database
   const handleAddCamera = async (data) => {
     try {
       const res = await addCamera({
@@ -168,7 +196,7 @@ export default function ViewClassroom({ open, onClose, roomId, roomName, onRoomD
   const handleRemoveClassroom = async () => {
     // Show confirmation dialog
     const confirmDelete = window.confirm(
-      `Are you sure you want to remove "${roomName}"? This action cannot be undone.`
+      `Are you sure you want to remove "${roomName}"? This action cannot be undone.`,
     );
 
     if (!confirmDelete) return;
@@ -177,20 +205,21 @@ export default function ViewClassroom({ open, onClose, roomId, roomName, onRoomD
 
     try {
       await deleteRoom(roomId);
-      
+
       if (onRoomDeleted) {
         onRoomDeleted(roomId);
       }
-      
+
       addActivity(`Classroom "${roomName}" has been removed`, "success");
       toast.success("Classroom removed successfully");
       onClose();
     } catch (error) {
       setIsDeleting(false);
-      
+
       if (handleServerDown(error, setIsServerUp, navigate)) return;
-      
-      const message = error.response?.data?.message || "Failed to remove classroom";
+
+      const message =
+        error.response?.data?.message || "Failed to remove classroom";
       toast.error(message);
     }
   };
@@ -310,16 +339,12 @@ export default function ViewClassroom({ open, onClose, roomId, roomName, onRoomD
             <div className="flex w-full h-full flex-col gap-6 px-8 py-5 min-h-0">
               {/* Content will be added here */}
               <div className="shadow-inner-neumorphic p-5 flex justify-center items-center w-full h-[65%] rounded-lg">
-                {selectedCamera ? (
-                  <video
-                    ref={videoRef}
-                    autoPlay
-                    playsInline
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                ) : (
-                  <p className="text-[#4F4F4F]">No camera selected</p>
-                )}
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
               <div className="shadow-inner-neumorphic flex flex-row p-5 gap-5 items-center justify-between w-full h-[15%] rounded-lg">
                 <button
