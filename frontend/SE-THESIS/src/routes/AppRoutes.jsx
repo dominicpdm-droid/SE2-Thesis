@@ -10,6 +10,7 @@ import ActivityPage from "../features/pages/activityPage";
 import AnalyticsPage from "../features/pages/analyticsPage";
 import NotificationPage from "../features/pages/notificationPage";
 import DevelopmentPage from "../features/pages/developmentPage";
+import ProfilePage from "../features/pages/profilePage";
 import Layout from "../shared/components/layouts/layout";
 
 import PageTransitions from "../shared/components/animations/pageTransitions";
@@ -36,6 +37,7 @@ export default function AppRoutes() {;
         <Route path="/iris/development" element={<DevelopmentPage />} />
         <Route path="/iris/analytics" element={<AnalyticsPage />} />
         <Route path="/iris/notifications" element={<NotificationPage />} />
+        <Route path="/iris/profile" element={<ProfilePage />} />
       </Route>
     </Routes>
   );

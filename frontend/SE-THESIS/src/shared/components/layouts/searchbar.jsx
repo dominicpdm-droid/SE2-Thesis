@@ -1,8 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import User from "@/assets/icons/user.png";
 import Search from "@/assets/icons/search.png";
 
 export default function SearchBar() {
+  const navigate = useNavigate();
+
+  const handleProfileClick = () => {
+    navigate("/iris/profile");
+  };
+
   return (
     <div className="w-full h-16 flex flex-row shadow-outside-dropshadow-small items-center justify-between bg-transparent px-4 ">
       <h1 className="text-subtitle text-[#1E1E1E] opacity-75 font-bold">
@@ -17,7 +24,9 @@ export default function SearchBar() {
             className="w-full bg-transparent text-[#1e1e1e] font-light text-subtitle outline-none"
           />
         </div>
-        <button className="w-10 aspect-square rounded-full shadow-outside-dropshadow-small flex items-center justify-center bg-[#A1A2A6] cursor-pointer hover:bg-[#b1b1b1] hover:scale-105 transition-transform duration-300">
+        <button 
+          onClick={handleProfileClick}
+          className="w-10 aspect-square rounded-full shadow-outside-dropshadow-small flex items-center justify-center bg-[#A1A2A6] cursor-pointer hover:bg-[#b1b1b1] hover:scale-105 transition-transform duration-300">
           <img src={User} alt="Logo" className="w-6 h-6" />
         </button>
       </div>

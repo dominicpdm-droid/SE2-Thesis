@@ -76,7 +76,7 @@ export default function classroomPage() {
         room_name: data.cr_name,
       });
 
-      addActivity(`Classroom "${data.cr_name}" has been added`, "success");
+      addActivity(data.cr_name, "created");
       toast.success(res.message);
     } catch (error) {
       if (handleServerDown(error, setIsServerUp, navigate)) return;

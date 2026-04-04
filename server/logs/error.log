@@ -144,3 +144,4 @@
 {"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:12:29"}
 {"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:12:36"}
 {"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:25:19"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-04-01 23:52:01"}

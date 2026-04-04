@@ -61,7 +61,16 @@ export default function ViewClassroom({
       setLightsOn(savedLightsOn);
       setFansOn(savedFansOn);
     }
-  }, [open, roomId, getDeviceState]);
+  }, [open, roomId]);
+
+  //! Reset state when modal closes
+  useEffect(() => {
+    if (!open) {
+      setLightsOn(false);
+      setFansOn(false);
+      setIsDeleting(false);
+    }
+  }, [open]);
 
   //! This initializes the camera from the database
   // useEffect(() => {
@@ -210,7 +219,7 @@ export default function ViewClassroom({
         onRoomDeleted(roomId);
       }
 
-      addActivity(`Classroom "${roomName}" has been removed`, "success");
+      addActivity(roomName, "removed");
       toast.success("Classroom removed successfully");
       onClose();
     } catch (error) {
@@ -228,8 +237,8 @@ export default function ViewClassroom({
     const newState = !lightsOn;
     setLightsOn(newState);
     setDeviceState(roomId, newState, fansOn);
-    const action = newState ? "turned on" : "turned off";
-    addActivity(`Lights in "${roomName}" have been ${action}`, "info");
+    const action = newState ? "turned_on" : "turned_off";
+    addActivity(roomName, action, "lights");
     toast.success(newState ? "Lights turned on" : "Lights turned off");
   };
 
@@ -237,8 +246,8 @@ export default function ViewClassroom({
     const newState = !fansOn;
     setFansOn(newState);
     setDeviceState(roomId, lightsOn, newState);
-    const action = newState ? "turned on" : "turned off";
-    addActivity(`Fans in "${roomName}" have been ${action}`, "info");
+    const action = newState ? "turned_on" : "turned_off";
+    addActivity(roomName, action, "fans");
     toast.success(newState ? "Fans turned on" : "Fans turned off");
   };
 

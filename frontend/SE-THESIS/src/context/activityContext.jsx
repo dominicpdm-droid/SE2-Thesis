@@ -18,11 +18,12 @@ export function ActivityProvider({ children }) {
     localStorage.setItem("activities", JSON.stringify(activities));
   }, [activities]);
 
-  const addActivity = (message, type = "info") => {
+  const addActivity = (roomName, action, target = null) => {
     const newActivity = {
       id: Date.now(),
-      message,
-      type, // 'info', 'warning', 'success', 'error'
+      roomName,
+      action,
+      target, // 'created', 'removed', 'turned_on', 'turned_off'
       timestamp: new Date(),
     };
     setActivities((prev) => [newActivity, ...prev]);
