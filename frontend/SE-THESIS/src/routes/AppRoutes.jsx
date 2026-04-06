@@ -29,6 +29,7 @@ export default function AppRoutes() {;
       <Route path="/iris" element={<HomePage />} />
       <Route path="/iris/login" element={<LoginPage />} />
       <Route path="/iris/signup" element={<SignUpPage />} />
+      <Route path="/iris/profile" element={<ProfilePage />} />
 
       <Route path="iris" element={<Layout />}>
         <Route path="/iris/home" element={<DashboardPage />} />
@@ -37,7 +38,6 @@ export default function AppRoutes() {;
         <Route path="/iris/development" element={<DevelopmentPage />} />
         <Route path="/iris/analytics" element={<AnalyticsPage />} />
         <Route path="/iris/notifications" element={<NotificationPage />} />
-        <Route path="/iris/profile" element={<ProfilePage />} />
       </Route>
     </Routes>
   );

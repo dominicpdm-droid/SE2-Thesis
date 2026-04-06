@@ -145,3 +145,6 @@
 {"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:12:36"}
 {"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-03-28 14:25:19"}
 {"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-04-01 23:52:01"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- getaddrinfo ENOTFOUND ac-2t7xlfj-shard-00-01.ltehxzm.mongodb.net with status code (500)","method":"POST","timestamp":"2026-04-06 13:23:03"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- getaddrinfo ENOTFOUND ac-2t7xlfj-shard-00-01.ltehxzm.mongodb.net with status code (500)","method":"POST","timestamp":"2026-04-06 13:23:05"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- getaddrinfo ENOTFOUND ac-2t7xlfj-shard-00-01.ltehxzm.mongodb.net with status code (500)","method":"POST","timestamp":"2026-04-06 13:23:40"}

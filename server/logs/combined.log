@@ -2536,3 +2536,36 @@
 {"ip":"::1","level":"info","message":"ROOM CREATE -- Room added room57: With status code 201","method":"POST","timestamp":"2026-04-05 01:37:35"}
 {"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-05 01:37:39"}
 {"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d14ae132f3561228dcc6da'),\n  room_name: 'room1',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d14c5f32f3561228dcc6e2'),\n  room_name: 'room57',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-05 01:37:39"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-06 01:18:35"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 01:18:40"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 01:18:44"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 01:18:46"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email lamoba@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-06 01:18:58"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d14ae132f3561228dcc6da'),\n  room_name: 'room1',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d14c5f32f3561228dcc6e2'),\n  room_name: 'room57',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-06 01:18:58"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-06 01:25:37"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-06 13:21:07"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:21:32"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- La data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-06 13:21:33"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d14ae132f3561228dcc6da'),\n  room_name: 'room1',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d14c5f32f3561228dcc6e2'),\n  room_name: 'room57',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-06 13:21:35"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:21:35"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:21:38"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:21:41"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:21:44"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:21:47"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:21:50"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:21:53"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:21:56"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:21:59"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:22:02"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:22:05"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:22:23"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:22:40"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- getaddrinfo ENOTFOUND ac-2t7xlfj-shard-00-01.ltehxzm.mongodb.net with status code (500)","method":"POST","timestamp":"2026-04-06 13:23:03"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- getaddrinfo ENOTFOUND ac-2t7xlfj-shard-00-01.ltehxzm.mongodb.net with status code (500)","method":"POST","timestamp":"2026-04-06 13:23:05"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-06 13:23:16"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- getaddrinfo ENOTFOUND ac-2t7xlfj-shard-00-01.ltehxzm.mongodb.net with status code (500)","method":"POST","timestamp":"2026-04-06 13:23:40"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email lamoba@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-06 13:24:08"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d14ae132f3561228dcc6da'),\n  room_name: 'room1',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d14c5f32f3561228dcc6e2'),\n  room_name: 'room57',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-06 13:24:08"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email lamoba@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-06 13:27:18"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d14ae132f3561228dcc6da'),\n  room_name: 'room1',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d14c5f32f3561228dcc6e2'),\n  room_name: 'room57',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-06 13:27:18"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-06 14:53:57"}
