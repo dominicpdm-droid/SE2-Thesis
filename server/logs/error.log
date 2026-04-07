@@ -148,3 +148,6 @@
 {"ip":"::1","level":"error","message":"AUTH LOGIN -- getaddrinfo ENOTFOUND ac-2t7xlfj-shard-00-01.ltehxzm.mongodb.net with status code (500)","method":"POST","timestamp":"2026-04-06 13:23:03"}
 {"ip":"::1","level":"error","message":"AUTH LOGIN -- getaddrinfo ENOTFOUND ac-2t7xlfj-shard-00-01.ltehxzm.mongodb.net with status code (500)","method":"POST","timestamp":"2026-04-06 13:23:05"}
 {"ip":"::1","level":"error","message":"AUTH LOGIN -- getaddrinfo ENOTFOUND ac-2t7xlfj-shard-00-01.ltehxzm.mongodb.net with status code (500)","method":"POST","timestamp":"2026-04-06 13:23:40"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- User trizxd123@gmail.com password do not match with status code (400)","method":"POST","timestamp":"2026-04-07 18:10:14"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- User trizxd123@gmail.com password do not match with status code (400)","method":"POST","timestamp":"2026-04-07 18:10:18"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-04-07 18:10:41"}

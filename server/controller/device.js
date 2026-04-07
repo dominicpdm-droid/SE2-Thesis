@@ -1,11 +1,12 @@
 require("dotenv").config();
 const logger = require("../utils/logger");
+const { getIO } = require("../config/socket");
 const Device = require("../models/device_model");
 
 exports.addDevice = async (req, res, next) => {
   try {
-    const { device_location, device_type, device_label } =
-      req.body;
+    const io = getIO();
+    const { device_location, device_type, device_label } = req.body;
     const userID = req.userID;
 
     const existingDevice = await Device.exists({
@@ -20,6 +21,13 @@ exports.addDevice = async (req, res, next) => {
 
     const device = new Device({
       device_owner: req.userID,
+      device_location,
+      device_type,
+      device_label,
+    });
+
+    io.emit("deviceAdded", {
+      _id: device._id,
       device_location,
       device_type,
       device_label,

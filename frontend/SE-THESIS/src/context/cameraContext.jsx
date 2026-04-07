@@ -77,6 +77,41 @@ export const CameraProvider = ({ children }) => {
     return streamsRef.current[roomId];
   };
 
+  const initializeRoomCamera = async (roomId, rooms, availableCameras) => {
+    try {
+      const room = rooms.find((r) => r._id === roomId);
+      const devices = await getDevice(roomId);
+
+      if (!devices.length) {
+        console.log("No saved device for room:", room?.room_name || roomId);
+        stopCamera(roomId);
+        return;
+      }
+
+      const savedDevice = devices[0];
+
+      const matchedCamera = availableCameras.find(
+        (cam) => cam.label === savedDevice.device_label,
+      );
+
+      if (!matchedCamera) {
+        console.warn(
+          "No matching browser camera for room:",
+          room?.room_name || roomId,
+          savedDevice.device_label,
+        );
+        stopCamera(roomId);
+        return;
+      }
+
+      stopCamera(roomId);
+      await startCamera(roomId, matchedCamera.deviceId);
+      startFrameCapture(roomId);
+    } catch (err) {
+      console.error("Error initializing room camera:", err);
+    }
+  };
+
   //! Frame capture
   const startFrameCapture = (roomId) => {
     const stream = streamsRef.current[roomId];
@@ -130,7 +165,7 @@ export const CameraProvider = ({ children }) => {
 
               try {
                 const data = await detectFrame(formData);
-                console.log("BACKEND RESPONSE:", data);
+                // console.log("BACKEND RESPONSE:", data);
               } catch (error) {
                 console.error("Error sending frame for room:", roomId, error);
               }
@@ -155,6 +190,7 @@ export const CameraProvider = ({ children }) => {
         stopAllCameras,
         getStream,
         startFrameCapture,
+        initializeRoomCamera,
       }}
     >
       {children}

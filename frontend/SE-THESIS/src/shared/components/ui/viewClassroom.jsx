@@ -13,6 +13,7 @@ import { useServerStatus } from "../../../context/serverStatusContext";
 import { useActivity } from "../../../context/activityContext";
 import { useDeviceState } from "../../../context/deviceStateContext";
 import { useNavigate } from "react-router-dom";
+import { socket } from "../../services/socketService";
 import { Toaster } from "../../components/ui/sonner";
 import { useCamera } from "../../../context/cameraContext";
 import { toast } from "sonner";
@@ -30,7 +31,191 @@ function PaperComponent(props) {
     </Draggable>
   );
 }
+function VideoModal({ room, stream, onClose }) {
+  const modalVideoRef = useRef(null);
+  const [isMarking, setIsMarking] = useState(false);
+  const [points, setPoints] = useState([]);
 
+  useEffect(() => {
+    if (modalVideoRef.current && stream) {
+      modalVideoRef.current.srcObject = stream;
+    }
+  }, [stream]);
+
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
+
+  useEffect(() => {
+    if (points.length === 4) {
+      console.log(
+        "ROI VIDEO COORDS:",
+        points.map((p) => ({
+          x: p.videoX,
+          y: p.videoY,
+        })),
+      );
+    }
+  }, [points]);
+
+  const handleOverlayClick = (e) => {
+    const overlayRect = e.currentTarget.getBoundingClientRect();
+    const videoEl = modalVideoRef.current;
+
+    if (!videoEl || !videoEl.videoWidth || !videoEl.videoHeight) {
+      return;
+    }
+
+    const clickX = e.clientX - overlayRect.left;
+    const clickY = e.clientY - overlayRect.top;
+
+    const boxWidth = overlayRect.width;
+    const boxHeight = overlayRect.height;
+
+    const videoWidth = videoEl.videoWidth;
+    const videoHeight = videoEl.videoHeight;
+
+    const videoAspect = videoWidth / videoHeight;
+    const boxAspect = boxWidth / boxHeight;
+
+    let renderedWidth, renderedHeight, offsetX, offsetY;
+
+    if (videoAspect > boxAspect) {
+      renderedWidth = boxWidth;
+      renderedHeight = boxWidth / videoAspect;
+      offsetX = 0;
+      offsetY = (boxHeight - renderedHeight) / 2;
+    } else {
+      renderedHeight = boxHeight;
+      renderedWidth = boxHeight * videoAspect;
+      offsetX = (boxWidth - renderedWidth) / 2;
+      offsetY = 0;
+    }
+
+    const isInsideRenderedVideo =
+      clickX >= offsetX &&
+      clickX <= offsetX + renderedWidth &&
+      clickY >= offsetY &&
+      clickY <= offsetY + renderedHeight;
+
+    if (!isInsideRenderedVideo) return;
+
+    const normalizedX = (clickX - offsetX) / renderedWidth;
+    const normalizedY = (clickY - offsetY) / renderedHeight;
+
+    const newPoint = {
+      displayX: clickX,
+      displayY: clickY,
+      videoX: Math.round(normalizedX * videoWidth),
+      videoY: Math.round(normalizedY * videoHeight),
+    };
+
+    setPoints((prev) => {
+      if (prev.length >= 4) return prev;
+
+      console.log("POINT:", newPoint);
+      return [...prev, newPoint];
+    });
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-[999] bg-black/80 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-[90vw] h-[85vh] bg-[#DFDEDA] rounded-xl p-4 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 z-20 bg-black/20 hover:bg-black/30 rounded-full p-2"
+        >
+          <X size={22} color="#4F4F4F" />
+        </button>
+
+        <button
+          onClick={() => {
+            setIsMarking((prev) => !prev);
+            setPoints([]);
+          }}
+          className="absolute top-3 left-3 z-20 px-4 py-2 rounded-lg bg-black/60 text-white hover:bg-black/75 transition"
+        >
+          {isMarking ? "Cancel Marking" : "Mark Area"}
+        </button>
+
+        <div className="relative w-full h-full rounded-lg overflow-hidden">
+          <video
+            ref={modalVideoRef}
+            autoPlay
+            playsInline
+            className="w-full h-full object-contain bg-black"
+          />
+          <svg
+            className="absolute inset-0 z-10 pointer-events-none w-full h-full"
+            width="100%"
+            height="100%"
+            viewBox={`0 0 ${modalVideoRef.current?.clientWidth || 0} ${modalVideoRef.current?.clientHeight || 0}`}
+            preserveAspectRatio="none"
+          >
+            {points.length > 1 && points.length < 4 && (
+              <polyline
+                points={points
+                  .map((p) => `${p.displayX},${p.displayY}`)
+                  .join(" ")}
+                fill="none"
+                stroke="lime"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            )}
+
+            {points.length === 4 && (
+              <polygon
+                points={points
+                  .map((p) => `${p.displayX},${p.displayY}`)
+                  .join(" ")}
+                fill="none"
+                stroke="lime"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            )}
+          </svg>
+
+          {points.map((point, index) => (
+            <div
+              key={index}
+              className="absolute z-20 w-4 h-4 bg-red-500 rounded-full border-2 border-white -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              style={{
+                left: `${point.displayX}px`,
+                top: `${point.displayY}px`,
+              }}
+            >
+              <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-white text-xs font-bold">
+                {index + 1}
+              </span>
+            </div>
+          ))}
+
+          {isMarking && (
+            <div
+              className="absolute inset-0 z-10 cursor-crosshair bg-transparent"
+              onClick={handleOverlayClick}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 export default function ViewClassroom({
   open,
   onClose,
@@ -51,6 +236,7 @@ export default function ViewClassroom({
   const [openDevices, setOpenDevices] = useState(false);
   const streamRef = useRef(null);
   const { getStream } = useCamera();
+  const [selectedRoom, setSelectedRoom] = useState(null);
 
   //! Load device states from context when modal opens
   //! Bali ito yung for electronic devices
@@ -71,38 +257,6 @@ export default function ViewClassroom({
       setIsDeleting(false);
     }
   }, [open]);
-
-  //! This initializes the camera from the database
-  // useEffect(() => {
-  //   async function initCameras() {
-  //     const devices = await getDevice(roomId);
-
-  //     const savedDevice = devices[0];
-
-  //     const matchedCamera = cameras.find(
-  //       (cam) => cam.label === savedDevice.device_label,
-  //     );
-  //     if (matchedCamera) {
-  //       console.log("MATCHED CAMERA FOUND:", matchedCamera);
-
-  //       setSelectedCamera(matchedCamera);
-
-  //       await startCamera(roomId, matchedCamera.deviceId);
-
-  //       const stream = getStream(roomId);
-
-  //       if (videoRef.current && stream) {
-  //         videoRef.current.srcObject = stream;
-  //       }
-  //     } else {
-  //       console.warn("No matching camera found");
-  //     }
-  //   }
-
-  //   if (cameras.length) {
-  //     initCameras();
-  //   }
-  // }, [roomId, open, cameras, startCamera, getStream]);
 
   //! This gets all the available cameras from the browser
   //! and list them as options to connect to the classroom
@@ -140,43 +294,44 @@ export default function ViewClassroom({
     } else {
       console.warn("No stream found for room:", roomId);
     }
+    socket.on("deviceAdded", getStream);
   }, [roomId, open, getStream]);
 
   //! This handles the camera stream whenever a new camera is selected
-  // useEffect(() => {
-  //   async function startCamera() {
-  //     if (!selectedCamera) return;
+  useEffect(() => {
+    async function startCamera() {
+      if (!selectedCamera) return;
 
-  //     try {
-  //       // stop previous stream FIRST
-  //       if (streamRef.current) {
-  //         streamRef.current.getTracks().forEach((track) => track.stop());
-  //       }
+      try {
+        // stop previous stream FIRST
+        if (streamRef.current) {
+          streamRef.current.getTracks().forEach((track) => track.stop());
+        }
 
-  //       const stream = await navigator.mediaDevices.getUserMedia({
-  //         video: {
-  //           deviceId: { exact: selectedCamera.deviceId },
-  //         },
-  //       });
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            deviceId: { exact: selectedCamera.deviceId },
+          },
+        });
 
-  //       streamRef.current = stream;
+        streamRef.current = stream;
 
-  //       if (videoRef.current) {
-  //         videoRef.current.srcObject = stream;
-  //       }
-  //     } catch (err) {
-  //       console.error("Camera error:", err);
-  //     }
-  //   }
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (err) {
+        console.error("Camera error:", err);
+      }
+    }
 
-  //   startCamera();
+    startCamera();
 
-  //   return () => {
-  //     if (streamRef.current) {
-  //       streamRef.current.getTracks().forEach((track) => track.stop());
-  //     }
-  //   };
-  // }, [selectedCamera]);
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, [selectedCamera]);
 
   //! This handles adding the camera to the classroom in the database
   const handleAddCamera = async (data) => {
@@ -353,6 +508,10 @@ export default function ViewClassroom({
                   autoPlay
                   playsInline
                   className="w-full h-full object-cover rounded-lg"
+                  onClick={() => {
+                    console.log("CLICKED VIDEO");
+                    setSelectedRoom(roomId);
+                  }}
                 />
               </div>
               <div className="shadow-inner-neumorphic flex flex-row p-5 gap-5 items-center justify-between w-full h-[15%] rounded-lg">
@@ -414,6 +573,7 @@ export default function ViewClassroom({
           </div>
         </div>
       </section>
+
       <Dialog
         open={openDevices}
         onClose={handleClose}
@@ -477,6 +637,13 @@ export default function ViewClassroom({
           </button>
         </section>
       </Dialog>
+      {selectedRoom && (
+        <VideoModal
+          room={selectedRoom}
+          stream={getStream(selectedRoom)}
+          onClose={() => setSelectedRoom(null)}
+        />
+      )}
       {/* <Toaster richColors expand position="bottom-right" /> */}
     </div>
   );

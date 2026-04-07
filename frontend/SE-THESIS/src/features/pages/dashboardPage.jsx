@@ -16,9 +16,9 @@ export default function dashboard() {
   const { activities } = useActivity();
   const emptyRooms = rooms.filter((room) => room.room_occupants > 0).length;
   const vacantRoom = rooms.filter((room) => room.room_occupants === 0).length;
-  const { startCamera, startFrameCapture } = useCamera();
+  const { startCamera, startFrameCapture, initializeRoomCamera } = useCamera();
   const [availableCameras, setAvailableCameras] = useState([]);
-  
+
   // Get 5 most recent activities
   const recentActivities = activities.slice(0, 5);
 
@@ -28,15 +28,15 @@ export default function dashboard() {
       // Match patterns like: Fans in "classroom 3" have been turned on
       const deviceMatch = activity.message.match(/(Fans|Lights)/i);
       const roomMatch = activity.message.match(/["']([^"']+)["']/);
-      const actionMatch = activity.message.match(/(turned on|turned off|have been turned on|have been turned off)/i);
-      
+      const actionMatch = activity.message.match(
+        /(turned on|turned off|have been turned on|have been turned off)/i,
+      );
+
       if (deviceMatch && roomMatch && actionMatch) {
         const device = deviceMatch[1].toLowerCase();
         const room = roomMatch[1];
-        const action = actionMatch[1]
-          .replace("have been ", "")
-          .toLowerCase();
-        
+        const action = actionMatch[1].replace("have been ", "").toLowerCase();
+
         return (
           <span>
             <span className="font-bold">{room}</span>
@@ -44,14 +44,14 @@ export default function dashboard() {
           </span>
         );
       }
-      
+
       // Fallback for old room creation/deletion format
       const cleanedMessage = activity.message
         .replace(/Classroom\s+["']([^"']+)["']\s*/i, "")
         .trim();
-      
+
       const roomName = roomMatch ? roomMatch[1] : "";
-      
+
       return (
         <span>
           <span className="font-bold">{roomName}</span>
@@ -59,9 +59,9 @@ export default function dashboard() {
         </span>
       );
     }
-    
+
     const { roomName, action, target } = activity;
-    
+
     let actionText = "";
     if (action === "created") {
       actionText = " has been created";
@@ -72,7 +72,7 @@ export default function dashboard() {
       const onOff = action === "turned_on" ? "turned on" : "turned off";
       actionText = ` ${targetName} ${onOff}`;
     }
-    
+
     return (
       <span>
         <span className="font-bold">{roomName}</span>
@@ -90,6 +90,18 @@ export default function dashboard() {
       socket.off("connect", handleConnect);
     };
   }, []);
+
+  useEffect(() => {
+    const handleDeviceAdded = async ({ roomId }) => {
+      await initializeRoomCamera(roomId, rooms, availableCameras);
+    };
+
+    socket.on("deviceAdded", handleDeviceAdded);
+
+    return () => {
+      socket.off("deviceAdded", handleDeviceAdded);
+    };
+  }, [rooms, availableCameras, initializeRoomCamera]);
 
   useEffect(() => {
     if (!rooms.length || !availableCameras.length) return;
@@ -132,10 +144,11 @@ export default function dashboard() {
         console.error("Error initializing room cameras:", err);
       }
     }
-
+    
+    socket.on("deviceAdded", initializeAllRoomCameras);
     initializeAllRoomCameras();
   }, [rooms, availableCameras]);
-  
+
   useEffect(() => {
     async function loadAvailableCameras() {
       try {
@@ -230,21 +243,19 @@ export default function dashboard() {
             <h2 className="text-title">Activity History</h2>
             <div className="w-full h-full rounded-2xl shadow-outside-dropshadow overflow-y-auto p-4 flex flex-col gap-3 pr-6 activity-scroll">
               {recentActivities.length === 0 ? (
-                <p className="text-subtitle text-[#999] font-light">No activities yet</p>
+                <p className="text-subtitle text-[#999] font-light">
+                  No activities yet
+                </p>
               ) : (
                 recentActivities.map((activity) => (
                   <div
                     key={activity.id}
-                    className="flex flex-row items-start gap-3 pb-3 border-b border-gray-200 last:border-b-0"
+                    className="flex flex-row items-center gap-3 pb-3 border-b border-gray-300 last:border-b-0"
                   >
-                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[#A7A7A4] flex items-center justify-center text-[#E4E3E1] font-bold text-lg">
+                    <p className="bg-[#A7A7A4] w-7 aspect-square rounded-full text-center text-[#E4E3E1] font-bold text-lg">
                       !
-                    </div>
-                    <div className="flex flex-col gap-1 min-w-0">
-                      <p className="text-m text-[#4F4F4F]">
-                        {renderActivityMessage(activity)}
-                      </p>
-                    </div>
+                    </p>
+                    <p>{renderActivityMessage(activity)}</p>
                   </div>
                 ))
               )}
