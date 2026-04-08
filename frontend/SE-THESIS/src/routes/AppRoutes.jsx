@@ -9,6 +9,7 @@ import DashboardPage from "../features/pages/dashboardPage";
 import ActivityPage from "../features/pages/activityPage";
 import AnalyticsPage from "../features/pages/analyticsPage";
 import NotificationPage from "../features/pages/notificationPage";
+import OrganizationPage from "../features/pages/organizationPage";
 import DevelopmentPage from "../features/pages/developmentPage";
 import ProfilePage from "../features/pages/profilePage";
 import Layout from "../shared/components/layouts/layout";
@@ -38,6 +39,7 @@ export default function AppRoutes() {;
         <Route path="/iris/development" element={<DevelopmentPage />} />
         <Route path="/iris/analytics" element={<AnalyticsPage />} />
         <Route path="/iris/notifications" element={<NotificationPage />} />
+        <Route path="/iris/organization" element={<OrganizationPage />} />
       </Route>
     </Routes>
   );

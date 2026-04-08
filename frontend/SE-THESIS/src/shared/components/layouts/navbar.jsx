@@ -5,6 +5,7 @@ import Room from "@/assets/icons/dashboard.png";
 import Activity from "@/assets/icons/activity.png";
 import Notif from "@/assets/icons/notif.png";
 import Dev from "@/assets/icons/dev.png";
+import Organization from "@/assets/icons/orgGroup.png";
 import Ex from "@/assets/icons/ex.png";
 
 import { useAuth } from "../../../context/authContext";
@@ -55,6 +56,13 @@ export default function Navbar() {
               className="w-full aspect-square stagger bg-[#E4E3E1] rounded-full flex items-center shadow-outside-dropshadow-small justify-center cursor-pointer hover:scale-102 hover:bg-[#d4d3d1] transition-transform duration-300 tooltip"
             >
               <img src={Notif} alt="Notifications" />
+            </button>
+
+            <button
+              onClick={() => navigate("/iris/organization")}
+              className="w-full aspect-square bg-[#E4E3E1] rounded-full flex items-center shadow-outside-dropshadow-small justify-center cursor-pointer hover:scale-102 hover:bg-[#d4d3d1] transition-transform duration-300 tooltip"
+            >
+              <img src={Organization} alt="Organization" />
             </button>
 
             <button

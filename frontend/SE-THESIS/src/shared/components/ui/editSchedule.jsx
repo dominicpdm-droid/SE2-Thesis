@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { X, SquarePen } from "lucide-react";
+import EditClassroom from "./editClassroom";
 
-export default function EditSchedule({ open, onClose, roomId }) {
+export default function EditSchedule({ open, onClose, roomId, onEditClassroom}) {
   if (!open) return null;
   const [selectedDay, setSelectedDay] = useState("");
   const [isOpen, setIsOpen] = useState(false); // controls dropdown visibility
+  const [isEditClassroomOpen, setIsEditClassroomOpen] = useState(false); // controls EditClassroom modal visibility
   const days = [
     "Monday",
     "Tuesday",
@@ -26,6 +28,14 @@ export default function EditSchedule({ open, onClose, roomId }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleEditClassroom = () => {
+    setIsEditClassroomOpen(true);
+  };
+
+  const handleCloseEditClassroom = () => {
+    setIsEditClassroomOpen(false);
+  };
 
   return (
     <div className="fixed inset-0 z-50">
@@ -98,7 +108,7 @@ export default function EditSchedule({ open, onClose, roomId }) {
                   <option value="Saturday">Saturday</option>
                 </select> */}
                 <button
-                  onClick={onClose}
+                  onClick={handleEditClassroom}
                   className="cursor-pointer flex items-center gap-2 hover:scale-102 transition-transform duration-150 p-2 rounded-full hover:bg-black/10"
                 >
                   <SquarePen size={24} color="#4F4F4F" /> Edit Schedule
@@ -108,6 +118,11 @@ export default function EditSchedule({ open, onClose, roomId }) {
           </div>
         </div>
       </section>
+      <EditClassroom 
+        open={isEditClassroomOpen} 
+        onClose={handleCloseEditClassroom} 
+        roomId={roomId} 
+      />
     </div>
   );
 }

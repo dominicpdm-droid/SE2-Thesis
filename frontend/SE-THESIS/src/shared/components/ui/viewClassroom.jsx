@@ -557,9 +557,6 @@ export default function ViewClassroom({
 
               <div className="flex flex-row justify-end gap-5 w-full h-[10%]">
                 <button className="w-fit bg-[#A1A2A6] text-subtitle secondary-text shadow-outside-dropshadow px-10 py-6 rounded-2xl cursor-pointer hover:bg-[#b1b1b1] hover:scale-101 transition-transform duration-300">
-                  View Schedule
-                </button>
-                <button className="w-fit bg-[#A1A2A6] text-subtitle secondary-text shadow-outside-dropshadow px-10 py-6 rounded-2xl cursor-pointer hover:bg-[#b1b1b1] hover:scale-101 transition-transform duration-300">
                   View Devices
                 </button>
                 <button

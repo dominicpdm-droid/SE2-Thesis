@@ -57,7 +57,7 @@ export default function KebabPullout({
           className="w-full px-6 py-3 flex items-center gap-3 text-[#4F4F4F] hover:bg-[#C4C3C0] transition-colors duration-150 text-subtitle font-medium border-t border-[#C4C3C0]"
         >
           <Edit2 size={18} />
-          Edit Schedule
+          View Schedule
         </button>
       </div>
     </Popover>
