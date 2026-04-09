@@ -17,6 +17,7 @@ import { socket } from "../../services/socketService";
 import { Toaster } from "../../components/ui/sonner";
 import { useCamera } from "../../../context/cameraContext";
 import { toast } from "sonner";
+import { addPoints } from "../../services/pointService";
 
 function PaperComponent(props) {
   const nodeRef = useRef(null);
@@ -31,10 +32,15 @@ function PaperComponent(props) {
     </Draggable>
   );
 }
+
 function VideoModal({ room, stream, onClose }) {
   const modalVideoRef = useRef(null);
   const [isMarking, setIsMarking] = useState(false);
   const [points, setPoints] = useState([]);
+  const [isSaved, setIsSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const now = new Date();
+  const [roiSets, setRoiSets] = useState([]);
 
   useEffect(() => {
     if (modalVideoRef.current && stream) {
@@ -62,6 +68,42 @@ function VideoModal({ room, stream, onClose }) {
       );
     }
   }, [points]);
+
+  const handleFinalSave = async () => {
+    try {
+      setIsSaving(true);
+
+      const payload = {
+        roomId: room,
+        rois: roiSets.map((roiSet, roiIndex) => ({
+          roi_index: roiIndex + 1,
+          points: roiSet.map((point, pointIndex) => ({
+            point_x: point.videoX,
+            point_y: point.videoY,
+            point_order: pointIndex + 1,
+          })),
+        })),
+      };
+
+      console.log("FINAL PAYLOAD:", payload);
+
+      const data = await addPoints(payload);
+      console.log("SERVER RESPONSE:", data);
+
+      setIsSaving(false);
+      setIsSaved(true);
+
+      setTimeout(() => {
+        setPoints([]);
+        setRoiSets([]);
+        setIsSaved(false);
+        setIsMarking(false);
+      }, 3000);
+    } catch (error) {
+      console.error("Failed to save room ROI:", error);
+      setIsSaving(false);
+    }
+  };
 
   const handleOverlayClick = (e) => {
     const overlayRect = e.currentTarget.getBoundingClientRect();
@@ -118,8 +160,9 @@ function VideoModal({ room, stream, onClose }) {
     setPoints((prev) => {
       if (prev.length >= 4) return prev;
 
+      const updated = [...prev, newPoint];
       console.log("POINT:", newPoint);
-      return [...prev, newPoint];
+      return updated;
     });
   };
 
@@ -134,20 +177,96 @@ function VideoModal({ room, stream, onClose }) {
       >
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 z-20 bg-black/20 hover:bg-black/30 rounded-full p-2"
+          className="absolute top-8 right-8 z-20 shadow-gray-500 shadow-sm border-[#858585] border-3 text-secondary hover:scale-102 rounded-full p-2"
         >
-          <X size={22} color="#4F4F4F" />
+          <X size={22} color="#858585" />
         </button>
 
-        <button
-          onClick={() => {
-            setIsMarking((prev) => !prev);
-            setPoints([]);
-          }}
-          className="absolute top-3 left-3 z-20 px-4 py-2 rounded-lg bg-black/60 text-white hover:bg-black/75 transition"
-        >
-          {isMarking ? "Cancel Marking" : "Mark Area"}
-        </button>
+        <p className="absolute top-8 left-8 z-20 text-secondary text-title ">
+          {now.toLocaleTimeString()} | {now.toLocaleDateString()}
+        </p>
+
+        <div className="flex flex-row gap-5 absolute bottom-8 right-8 z-20">
+          <button
+            onClick={async () => {
+              if (points.length === 4) {
+                const currentROI = points;
+
+                const updatedSets = [...roiSets, currentROI];
+                setRoiSets(updatedSets);
+
+                // 🔥 SECOND ROI → SEND TO BACKEND
+                if (updatedSets.length === 2) {
+                  try {
+                    setIsSaving(true);
+
+                    const payload = {
+                      roomId: room,
+                      rois: updatedSets.map((roiSet, roiIndex) => ({
+                        roi_index: roiIndex + 1,
+                        points: roiSet.map((point, pointIndex) => ({
+                          point_x: point.videoX,
+                          point_y: point.videoY,
+                          point_order: pointIndex + 1,
+                        })),
+                      })),
+                    };
+
+                    console.log("FINAL PAYLOAD:", payload);
+
+                    await addPoints(payload);
+
+                    setIsSaving(false);
+                    setIsSaved(true);
+
+                    setTimeout(() => {
+                      setPoints([]);
+                      setRoiSets([]);
+                      setIsSaved(false);
+                      setIsMarking(false);
+                    }, 3000);
+                  } catch (err) {
+                    console.error("Save failed:", err);
+                    setIsSaving(false);
+                  }
+
+                  return;
+                }
+
+                // 🔥 FIRST ROI → PREPARE FOR SECOND
+                setPoints([]);
+                setIsMarking(true);
+                return;
+              }
+
+              // ❌ Cancel logic
+              if (isMarking) {
+                setIsMarking(false);
+                setPoints([]);
+                setRoiSets([]);
+                return;
+              }
+
+              // ✅ Start configuring
+              setPoints([]);
+              setRoiSets([]);
+              setIsMarking(true);
+            }}
+            className="px-[2vw] py-[1vw] rounded-lg bg-[#A1A2A6] shadow-black shadow-sm text-secondary text-title hover:scale-102 transition"
+          >
+            {isSaving
+              ? "Saving..."
+              : isSaved
+                ? "Saved"
+                : points.length === 4
+                  ? roiSets.length === 0
+                    ? "Save 1st ROI"
+                    : "Save 2nd ROI"
+                  : isMarking
+                    ? "Cancel"
+                    : "Configure"}
+          </button>
+        </div>
 
         <div className="relative w-full h-full rounded-lg overflow-hidden">
           <video
@@ -163,18 +282,38 @@ function VideoModal({ room, stream, onClose }) {
             viewBox={`0 0 ${modalVideoRef.current?.clientWidth || 0} ${modalVideoRef.current?.clientHeight || 0}`}
             preserveAspectRatio="none"
           >
-            {points.length > 1 && points.length < 4 && (
-              <polyline
-                points={points
-                  .map((p) => `${p.displayX},${p.displayY}`)
-                  .join(" ")}
-                fill="none"
-                stroke="lime"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+            {roiSets.map((set, setIndex) =>
+              set.map((point, index) => (
+                <div
+                  key={`saved-${setIndex}-${index}`}
+                  className="absolute z-20 w-4 h-4 rounded-full border-2 border-white -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                  style={{
+                    left: `${point.displayX}px`,
+                    top: `${point.displayY}px`,
+                    backgroundColor: setIndex === 0 ? "cyan" : "orange",
+                  }}
+                >
+                  <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-white text-xs font-bold">
+                    {index + 1}
+                  </span>
+                </div>
+              )),
             )}
+
+            {points.map((point, index) => (
+              <div
+                key={`current-${index}`}
+                className="absolute z-20 w-4 h-4 bg-red-500 rounded-full border-2 border-white -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                style={{
+                  left: `${point.displayX}px`,
+                  top: `${point.displayY}px`,
+                }}
+              >
+                <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-white text-xs font-bold">
+                  {index + 1}
+                </span>
+              </div>
+            ))}
 
             {points.length === 4 && (
               <polygon
@@ -205,7 +344,7 @@ function VideoModal({ room, stream, onClose }) {
             </div>
           ))}
 
-          {isMarking && (
+          {isMarking && points.length < 4 && !isSaving && !isSaved && (
             <div
               className="absolute inset-0 z-10 cursor-crosshair bg-transparent"
               onClick={handleOverlayClick}
@@ -216,6 +355,7 @@ function VideoModal({ room, stream, onClose }) {
     </div>
   );
 }
+
 export default function ViewClassroom({
   open,
   onClose,

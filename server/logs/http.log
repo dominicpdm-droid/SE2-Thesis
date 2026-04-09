@@ -3113,3 +3113,160 @@
 {"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-08 23:10:23"}
 {"ip":"::1","level":"info","message":"AUTH LOGIN -- Email lamoba@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-08 23:10:37"}
 {"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d14ae132f3561228dcc6da'),\n  room_name: 'room1',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d14c5f32f3561228dcc6e2'),\n  room_name: 'room57',\n  room_owner: { _id: new ObjectId('69c771c5817503a088feb03c'), first_name: 'La' },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-08 23:10:37"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-09 20:35:19"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:35:23"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:35:30"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:35:37"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 20:36:13"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c9caa2db3c4e9762f7637d'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c9f073db3c4e9762f76416'),\n  room_name: 'Sample Room 2',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c9f08ddb3c4e9762f76427'),\n  room_name: 'Sample Room 3',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d4e47a6e3bbb4f73e1020f'),\n  room_name: 'Sample Room 4',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d5005fedbb8b1a66be7408'),\n  room_name: 'Sample Room 5',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 20:36:18"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:37:56"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:37:56"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Sample Room : With status code 201","method":"POST","timestamp":"2026-04-09 20:37:57"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- User trizxd123@gmail.com password do not match with status code (400)","method":"POST","timestamp":"2026-04-09 20:38:06"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 20:38:10"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c9caa2db3c4e9762f7637d'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c9f073db3c4e9762f76416'),\n  room_name: 'Sample Room 2',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c9f08ddb3c4e9762f76427'),\n  room_name: 'Sample Room 3',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d4e47a6e3bbb4f73e1020f'),\n  room_name: 'Sample Room 4',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d5005fedbb8b1a66be7408'),\n  room_name: 'Sample Room 5',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d79da417b5a739b5685f52'),\n  room_name: 'Sample Room ',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 20:38:10"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Sample Room 3","method":"DELETE","timestamp":"2026-04-09 20:39:00"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:39:01"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:39:01"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:39:01"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 20:39:21"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:39:22"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:39:22"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:39:22"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 20:39:36"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:39:47"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:39:48"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:39:48"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:39:48"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-09 20:42:08"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 20:43:05"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Triztan data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-09 20:43:28"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c9caa2db3c4e9762f7637d'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c9f073db3c4e9762f76416'),\n  room_name: 'Sample Room 2',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d4e47a6e3bbb4f73e1020f'),\n  room_name: 'Sample Room 4',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d5005fedbb8b1a66be7408'),\n  room_name: 'Sample Room 5',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d79da417b5a739b5685f52'),\n  room_name: 'Sample Room ',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 20:43:28"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:44:02"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Triztan data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-09 20:44:02"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c9caa2db3c4e9762f7637d'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c9f073db3c4e9762f76416'),\n  room_name: 'Sample Room 2',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d4e47a6e3bbb4f73e1020f'),\n  room_name: 'Sample Room 4',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d5005fedbb8b1a66be7408'),\n  room_name: 'Sample Room 5',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d79da417b5a739b5685f52'),\n  room_name: 'Sample Room ',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 20:44:02"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-04-09 20:44:24"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 20:44:30"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c9caa2db3c4e9762f7637d'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c9f073db3c4e9762f76416'),\n  room_name: 'Sample Room 2',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d4e47a6e3bbb4f73e1020f'),\n  room_name: 'Sample Room 4',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d5005fedbb8b1a66be7408'),\n  room_name: 'Sample Room 5',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d79da417b5a739b5685f52'),\n  room_name: 'Sample Room ',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 20:44:34"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 20:44:50"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:44:51"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:44:51"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:44:51"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 20:44:57"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69c9caa2db3c4e9762f7637d'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69c9f073db3c4e9762f76416'),\n  room_name: 'Sample Room 2',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d4e47a6e3bbb4f73e1020f'),\n  room_name: 'Sample Room 4',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d5005fedbb8b1a66be7408'),\n  room_name: 'Sample Room 5',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n},{\n  _id: new ObjectId('69d79da417b5a739b5685f52'),\n  room_name: 'Sample Room ',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 20:44:58"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Sample Room ","method":"DELETE","timestamp":"2026-04-09 20:45:44"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Sample Room","method":"DELETE","timestamp":"2026-04-09 20:46:51"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Sample Room 5","method":"DELETE","timestamp":"2026-04-09 20:46:56"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Sample Room 4","method":"DELETE","timestamp":"2026-04-09 20:47:00"}
+{"ip":"::1","level":"info","message":"ROOM DELETE -- Room deleted: Sample Room 2","method":"DELETE","timestamp":"2026-04-09 20:47:12"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:47:22"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:47:22"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:47:22"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 20:47:24"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Triztan data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-09 20:47:24"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-09 20:47:24"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-09 20:53:53"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-09 21:24:31"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:25:31"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-09 21:25:31"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Triztan data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-09 21:25:31"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 21:32:29"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-09 21:32:29"}
+{"ip":"::1","level":"info","message":"ROOM CREATE -- Room added Sample Room: With status code 201","method":"POST","timestamp":"2026-04-09 21:32:39"}
+{"ip":"::1","level":"info","message":"DEVICE CREATE -- Device added SN-U01 (0c45:636b): With status code 201","method":"POST","timestamp":"2026-04-09 21:32:48"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 21:33:12"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d7aa776ca4fca79cae8936'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 21:33:12"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 21:38:12"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d7aa776ca4fca79cae8936'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 21:38:12"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Triztan data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-09 21:46:09"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d7aa776ca4fca79cae8936'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 21:46:09"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 21:46:34"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:46:37"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:46:37"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:46:39"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:46:43"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:46:49"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:46:50"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:46:56"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:46:58"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:47:01"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:47:01"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:47:01"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 21:47:01"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-09 22:57:55"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-09 22:58:05"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-09 22:58:17"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d7aa776ca4fca79cae8936'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 22:58:17"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Triztan data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-09 23:04:36"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d7aa776ca4fca79cae8936'),\n  room_name: 'Sample Room',\n  room_owner: {\n    _id: new ObjectId('69c3e8291e0871695eda9ee1'),\n    first_name: 'Triztan'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-09 23:04:36"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:02:25"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:02:34"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:02:41"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:02:43"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:02:47"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:03:00"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:03:06"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:03:09"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:03:12"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:03:13"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:03:34"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:03:39"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:03:42"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:03:44"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:04:06"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:04:08"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:04:15"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:04:17"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:04:27"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:04:38"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:04:50"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:04:55"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:05:01"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:05:03"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:05:07"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:05:08"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:05:14"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:05:19"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:05:22"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:05:34"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:05:38"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:23:23"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:23:28"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:23:34"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:23:44"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:23:46"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:23:58"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:24:02"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:24:09"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:24:12"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:24:16"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:24:19"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:25:26"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:25:28"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:26:29"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:26:33"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:26:37"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:27:30"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:27:35"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:32:13"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:32:19"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:32:29"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:32:34"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:32:38"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:32:50"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:33:05"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:33:10"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:33:23"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:33:27"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:33:45"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:33:47"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:33:51"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:33:59"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:34:03"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:34:05"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:34:07"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:34:13"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:34:29"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:34:32"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:34:40"}
+{"ip":"::1","level":"info","message":"ROI ADD -- ROI added undefined: With status code 201","method":"POST","timestamp":"2026-04-10 00:41:54"}
