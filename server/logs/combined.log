@@ -2925,3 +2925,23 @@
 {"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:34:32"}
 {"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-10 00:34:40"}
 {"ip":"::1","level":"info","message":"ROI ADD -- ROI added undefined: With status code 201","method":"POST","timestamp":"2026-04-10 00:41:54"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-11 14:31:57"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-11 14:34:20"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-04-11 14:34:55"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-04-11 14:35:42"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-04-11 14:36:01"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-04-11 14:36:23"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-04-11 14:36:57"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email princessaprilsanandres@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-11 14:37:32"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d45a837af65306dd3c38f5'),\n  room_name: 'bahay ni einie',\n  room_owner: {\n    _id: new ObjectId('69d45a1a7af65306dd3c38ef'),\n    first_name: 'princess april'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-11 14:37:32"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- princess april data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-11 14:59:39"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d45a837af65306dd3c38f5'),\n  room_name: 'bahay ni einie',\n  room_owner: {\n    _id: new ObjectId('69d45a1a7af65306dd3c38ef'),\n    first_name: 'princess april'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-11 14:59:39"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- princess april data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-11 15:23:04"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d45a837af65306dd3c38f5'),\n  room_name: 'bahay ni einie',\n  room_owner: {\n    _id: new ObjectId('69d45a1a7af65306dd3c38ef'),\n    first_name: 'princess april'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-11 15:23:04"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email princessaprilsanandres@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-11 15:37:45"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d45a837af65306dd3c38f5'),\n  room_name: 'bahay ni einie',\n  room_owner: {\n    _id: new ObjectId('69d45a1a7af65306dd3c38ef'),\n    first_name: 'princess april'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-11 15:37:45"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-11 16:16:23"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- princess april data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-11 16:16:23"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d45a837af65306dd3c38f5'),\n  room_name: 'bahay ni einie',\n  room_owner: {\n    _id: new ObjectId('69d45a1a7af65306dd3c38ef'),\n    first_name: 'princess april'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-11 16:16:23"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email princessaprilsanandres@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-11 16:16:33"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69d45a837af65306dd3c38f5'),\n  room_name: 'bahay ni einie',\n  room_owner: {\n    _id: new ObjectId('69d45a1a7af65306dd3c38ef'),\n    first_name: 'princess april'\n  },\n  room_occupants: 0,\n  __v: 0\n}","timestamp":"2026-04-11 16:16:33"}
