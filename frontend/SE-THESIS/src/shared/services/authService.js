@@ -49,11 +49,11 @@ export const checkFirstTime = async () => {
   }
 };
 
-export const updateOrganization = async (organizationId) => {
+export const updateOrganization = async (organizationId, appliedAt) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axiosClient.patch("/auth/update-organization", 
-      { user_organization: organizationId },
+      { user_organization: organizationId, applied_at: appliedAt },
       { headers: { Authorization: `Bearer ${token}` } }
     );
     return response.data;

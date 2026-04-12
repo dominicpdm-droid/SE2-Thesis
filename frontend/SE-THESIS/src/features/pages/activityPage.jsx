@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useActivity } from "../../context/activityContext";
 import UnderConstruction from "@/assets/images/under_construction.png";
+import sortDown from "@/assets/icons/sortDown.png";
+import sortUp from "@/assets/icons/sortUp.png";
 
 export default function ActivityPage() {
   const [selectedButton, setSelectedButton] = useState(0);
@@ -8,6 +10,7 @@ export default function ActivityPage() {
   const scrollContainerRef = useRef(null);
   const { getActivitiesByDate } = useActivity();
   const buttons = ["Today", "This Week", "This Month"];
+  const [sortAsc, setSortAsc] = useState(false);
 
   const filterMap = {
     0: "today",
@@ -15,12 +18,16 @@ export default function ActivityPage() {
     2: "month",
   };
 
-  const filteredActivities = getActivitiesByDate(filterMap[selectedButton]);
+  const filteredActivities = getActivitiesByDate(filterMap[selectedButton])
+  .slice()
+  .sort((a, b) => sortAsc 
+    ? new Date(a.timestamp) - new Date(b.timestamp)  
+    : new Date(b.timestamp) - new Date(a.timestamp)  
+  );
   const currentDisplayCount = displayedCounts[selectedButton];
   const displayedActivities = filteredActivities.slice(0, currentDisplayCount);
   const hasMoreActivities = filteredActivities.length > currentDisplayCount;
 
-  // Reset displayed count when filter changes
   useEffect(() => {
     setDisplayedCounts((prev) => ({ ...prev, [selectedButton]: 10 }));
     if (scrollContainerRef.current) {
@@ -57,7 +64,6 @@ export default function ActivityPage() {
         const device = deviceMatch[1].toLowerCase();
         const room = roomMatch[1];
         
-        // Extract action (turned on/off)
         if (message.toLowerCase().includes("turned on")) {
           return (
             <span>
@@ -75,7 +81,6 @@ export default function ActivityPage() {
         }
       }
       
-      // Parse old room creation/deletion format: classroom "[name]" has been removed/created
       const roomCreationMatch = message.match(/classroom\s+["']([^"']+)["']\s+(has been created|has been removed)/i);
       if (roomCreationMatch) {
         const room = roomCreationMatch[1];
@@ -89,11 +94,9 @@ export default function ActivityPage() {
         );
       }
       
-      // Fallback: just return the message as-is
       return <span>{message}</span>;
     }
     
-    // Handle new structured format
     const { roomName, action, target } = activity;
     
     let actionText = "";
@@ -119,6 +122,13 @@ export default function ActivityPage() {
       <section className="relative w-full h-full flex flex-col gap-6 min-h-0">
         <div className="w-full flex flex-row items-end justify-between text-[#1E1E1E] opacity-75">
           <h1 className="text-subheader font-bold">Activity Log</h1>
+          {/* <button 
+            onClick={() => setSortAsc(prev => !prev)}
+            className="flex items-center gap-2 w-auto h-10 bg-transparent text-[#1E1E1E] px-12 rounded-lg text-2xl font-semibold hover:bg-[#d4d3d1] transition-colors duration-300"
+          >
+            <img src={sortAsc ? sortUp : sortDown} alt="Sort" className="w-10 h-6" />
+            Sort
+          </button> */}
         </div>
         <div className="w-full h-full min-h-0 rounded-2xl shadow-outside-dropshadow flex flex-col bg-[#shadow-black/40 hover:shadow-md]">
           <div className="w-full h-[15%] shadow-lg shadow-gray px-5 py-3">

@@ -46,13 +46,16 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("token", token);
       socket.connect();
       
+      // Fetch the current user data after login
+      await fetchCurrentUser(token);
+      
       return {
         success: true,
         message,
       };
 
     } catch (err) {
-      if (handleServerDown(error, setIsServerUp, navigate)) return;
+      if (handleServerDown(err, setIsServerUp, navigate)) return;
       return {
         success: false,
         // message: err.response?.data?.message || "Login failed",
@@ -61,11 +64,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
   const logout = () => {
+    // Clear user data first
+    setUser(null);
+    
+    // Then clear all auth data
     localStorage.removeItem("token");
     socket.disconnect()
     toast.success("Logged out successfully!");
     navigate("iris/");
-    setUser(null);
   };
 
   return (

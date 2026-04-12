@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: ""
   },
+  applied_at: {
+    type: Date,
+    default: null
+  },
   is_firsttime: {
     type: Boolean,
     default: true

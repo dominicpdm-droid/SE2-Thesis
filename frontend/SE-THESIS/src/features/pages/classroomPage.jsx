@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { handleServerDown } from "../../shared/utils/serverDownHandler.js";
 import { useServerStatus } from "../../context/serverStatusContext.jsx";
 import { useActivity } from "../../context/activityContext.jsx";
+import { useAuth } from "../../context/authContext.jsx";
 import { toast } from "sonner";
 import { addRoom, getRooms } from "../../shared/services/roomService.js";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,7 @@ export default function classroomPage() {
   const navigate = useNavigate();
   const { rooms, setRooms } = useRooms();
   const { addActivity } = useActivity();
+  const { user } = useAuth();
   const [kebabAnchorEl, setKebabAnchorEl] = useState(null);
   const [selectedRoomId, setSelectedRoomId] = useState(null);
   const [selectedRoomName, setSelectedRoomName] = useState(null);
@@ -165,7 +167,9 @@ export default function classroomPage() {
       >
         <div className="bg-[#DFDEDA] shadow-inner shadow-black/10 flex flex-col gap-2 items-center justify-center">
           <div className="w-[25vw] bg-[#C4C3C0] shadow shadow-black/20 flex-1 flex flex-row items-center justify-between p-5">
-            <h2 className="text-subtitle text-[#4F4F4F]">Add Classroom</h2>
+            <h2 className="text-subtitle text-[#4F4F4F]">
+              {user?.user_organization ? "Add Classroom" : "Organization Required"}
+            </h2>
             <button
               onClick={handleClose}
               className="cursor-pointer hover:scale-105 transition-all duration-150"
@@ -174,23 +178,40 @@ export default function classroomPage() {
             </button>
           </div>
           <div className="w-full px-5">
-            <form
-              onSubmit={handleSubmit(onSubmit, onError)}
-              className="w-full flex flex-col gap-5 py-5 items-center justify-center"
-            >
-              <input
-                {...register("cr_name", { required: "Please fill the form" })}
-                className="w-full bg-[#E4E3E1] primary-text rounded-3xl px-6 py-4 shadow-inside-dropshadow-small font-light text-subtitle"
-                placeholder="Enter Classroom Name"
-              />
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full bg-[#A1A2A6] text-subtitle text-[#E4E3E1] shadow-outside-dropshadow py-4 rounded-3xl`}
+            {user?.user_organization ? (
+              <form
+                onSubmit={handleSubmit(onSubmit, onError)}
+                className="w-full flex flex-col gap-5 py-5 items-center justify-center"
               >
-                {isSubmitting ? "Adding..." : "Add Room"}
-              </button>
-            </form>
+                <input
+                  {...register("cr_name", { required: "Please fill the form" })}
+                  className="w-full bg-[#E4E3E1] primary-text rounded-3xl px-6 py-4 shadow-inside-dropshadow-small font-light text-subtitle"
+                  placeholder="Enter Classroom Name"
+                />
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`w-full bg-[#A1A2A6] text-subtitle text-[#E4E3E1] shadow-outside-dropshadow py-4 rounded-3xl`}
+                >
+                  {isSubmitting ? "Adding..." : "Add Room"}
+                </button>
+              </form>
+            ) : (
+              <div className="w-full flex flex-col gap-5 py-10 items-center justify-center">
+                <p className="text-center text-subtitle text-[#4F4F4F] font-medium">
+                  Apply to an organization first
+                </p>
+                <button
+                  onClick={() => {
+                    handleClose();
+                    navigate("/applyOrg");
+                  }}
+                  className="w-full bg-[#A1A2A6] text-subtitle text-[#E4E3E1] shadow-outside-dropshadow py-4 rounded-3xl hover:scale-105 transition-all duration-150"
+                >
+                  Go to Apply Organization
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </Popover>

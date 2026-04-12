@@ -10,10 +10,14 @@ exports.addRoom = async (req, res, next) => {
   try {
     const io = getIO();
     const { room_name } = req.body;
-    const userExists = await User.exists({ _id: req.userID });
+    const user = await User.findById(req.userID);
 
-    if (!userExists) {
+    if (!user) {
       return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!user.user_organization) {
+      return res.status(400).json({ message: "User is not part of any organization" });
     }
 
     const existingRoom = await Room.findOne({ room_name, room_owner: req.userID })
@@ -31,6 +35,7 @@ exports.addRoom = async (req, res, next) => {
     const room = new Room({
       room_name,
       room_owner: req.userID,
+      room_organization: user.user_organization,
     });
 
     await room.save();
@@ -59,8 +64,18 @@ exports.addRoom = async (req, res, next) => {
 
 exports.getRooms = async (req, res, next) => {
   try {
+    const user = await User.findById(req.userID);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!user.user_organization) {
+      return res.status(200).json([]);
+    }
+
     const rooms = await Room.find({
-      room_owner: req.userID,
+      room_organization: user.user_organization,
     }).populate("room_owner", "first_name");
     logger.info({
       message: `ROOMS FETCHED -- ${rooms}`

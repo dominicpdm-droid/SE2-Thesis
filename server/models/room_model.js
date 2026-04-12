@@ -13,6 +13,10 @@ const roomSchema = mongoose.Schema({
     room_occupants: {
         type: Number,
         default: 0
+    },
+    room_organization: {
+        type: String,
+        required: true
     }
 });
 
