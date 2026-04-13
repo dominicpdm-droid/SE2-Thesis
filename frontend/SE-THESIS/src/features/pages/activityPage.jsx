@@ -3,14 +3,23 @@ import { useActivity } from "../../context/activityContext";
 import UnderConstruction from "@/assets/images/under_construction.png";
 import sortDown from "@/assets/icons/sortDown.png";
 import sortUp from "@/assets/icons/sortUp.png";
+import { listActivity } from "../../shared/services/activityService";
+import { useRooms } from "../../context/roomContext";
 
 export default function ActivityPage() {
   const [selectedButton, setSelectedButton] = useState(0);
-  const [displayedCounts, setDisplayedCounts] = useState({ 0: 10, 1: 10, 2: 10 });
+  const [displayedCounts, setDisplayedCounts] = useState({
+    0: 10,
+    1: 10,
+    2: 10,
+  });
   const scrollContainerRef = useRef(null);
   const { getActivitiesByDate } = useActivity();
   const buttons = ["Today", "This Week", "This Month"];
   const [sortAsc, setSortAsc] = useState(false);
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { rooms } = useRooms();
 
   const filterMap = {
     0: "today",
@@ -18,22 +27,61 @@ export default function ActivityPage() {
     2: "month",
   };
 
-  const filteredActivities = getActivitiesByDate(filterMap[selectedButton])
-  .slice()
-  .sort((a, b) => sortAsc 
-    ? new Date(a.timestamp) - new Date(b.timestamp)  
-    : new Date(b.timestamp) - new Date(a.timestamp)  
-  );
+  useEffect(() => {
+    const fetchActivities = async () => {
+      try {
+        if (!rooms || rooms.length === 0) return;
+
+        console.log("Rooms in ActivityPage:", rooms);
+
+        const res = await listActivity(rooms[0]._id);
+        console.log("Fetched activities:", res);
+
+        setActivities(res);
+      } catch (error) {
+        console.error("Failed to fetch activities:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchActivities();
+  }, [rooms]);
+
+  const filteredActivities = activities
+    .filter((activity) => {
+      const activityDate = new Date(activity.activity_timestamp);
+      const now = new Date();
+
+      if (selectedButton === 0) {
+        return activityDate.toDateString() === now.toDateString();
+      }
+
+      if (selectedButton === 1) {
+        const weekAgo = new Date(now);
+        weekAgo.setDate(now.getDate() - 7);
+        return activityDate >= weekAgo;
+      }
+
+      if (selectedButton === 2) {
+        return (
+          activityDate.getMonth() === now.getMonth() &&
+          activityDate.getFullYear() === now.getFullYear()
+        );
+      }
+
+      return true;
+    })
+    .slice()
+    .sort((a, b) =>
+      sortAsc
+        ? new Date(a.activity_timestamp) - new Date(b.activity_timestamp)
+        : new Date(b.activity_timestamp) - new Date(a.activity_timestamp),
+    );
+
   const currentDisplayCount = displayedCounts[selectedButton];
   const displayedActivities = filteredActivities.slice(0, currentDisplayCount);
   const hasMoreActivities = filteredActivities.length > currentDisplayCount;
-
-  useEffect(() => {
-    setDisplayedCounts((prev) => ({ ...prev, [selectedButton]: 10 }));
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTop = 0;
-    }
-  }, [selectedButton]);
 
   const handleLoadMore = () => {
     setDisplayedCounts((prev) => ({
@@ -53,17 +101,17 @@ export default function ActivityPage() {
 
   const renderActivityMessage = (activity) => {
     // Handle old message format for backward compatibility
-    if (activity.message) {
-      const message = activity.message;
-      
+    if (activity.activity_message) {
+      const message = activity.activity_message;
+
       // Match patterns like: Lights in "classroom 3" have been turned on
       const deviceMatch = message.match(/(Lights|Fans)/i);
       const roomMatch = message.match(/["']([^"']+)["']/);
-      
+
       if (deviceMatch && roomMatch) {
         const device = deviceMatch[1].toLowerCase();
         const room = roomMatch[1];
-        
+
         if (message.toLowerCase().includes("turned on")) {
           return (
             <span>
@@ -80,12 +128,14 @@ export default function ActivityPage() {
           );
         }
       }
-      
-      const roomCreationMatch = message.match(/classroom\s+["']([^"']+)["']\s+(has been created|has been removed)/i);
+
+      const roomCreationMatch = message.match(
+        /classroom\s+["']([^"']+)["']\s+(has been created|has been removed)/i,
+      );
       if (roomCreationMatch) {
         const room = roomCreationMatch[1];
         const action = roomCreationMatch[2].toLowerCase();
-        
+
         return (
           <span>
             <span className="font-bold">{room}</span>
@@ -93,12 +143,12 @@ export default function ActivityPage() {
           </span>
         );
       }
-      
+
       return <span>{message}</span>;
     }
-    
+
     const { roomName, action, target } = activity;
-    
+
     let actionText = "";
     if (action === "created") {
       actionText = " has been created";
@@ -109,7 +159,7 @@ export default function ActivityPage() {
       const onOff = action === "turned_on" ? "turned on" : "turned off";
       actionText = ` ${targetName} ${onOff}`;
     }
-    
+
     return (
       <span>
         <span className="font-bold">{roomName}</span>
@@ -117,6 +167,7 @@ export default function ActivityPage() {
       </span>
     );
   };
+  
   return (
     <div className="w-full h-full bg-[#E4E3E1] min-h-0">
       <section className="relative w-full h-full flex flex-col gap-6 min-h-0">
@@ -163,7 +214,7 @@ export default function ActivityPage() {
                   <div className="flex-1">
                     {displayedActivities.map((activity) => (
                       <div
-                        key={activity.id}
+                        key={activity._id}
                         className="w-full border-b border-gray-300 p-5 primary-text flex flex-row items-center justify-between hover:bg-gray-100 transition-colors duration-200"
                       >
                         <div className="flex flex-col gap-1">
@@ -171,7 +222,7 @@ export default function ActivityPage() {
                             {renderActivityMessage(activity)}
                           </p>
                           <p className="text-xs text-gray-500">
-                            {formatTime(activity.timestamp)}
+                            {formatTime(activity.activity_timestamp)}
                           </p>
                         </div>
                       </div>

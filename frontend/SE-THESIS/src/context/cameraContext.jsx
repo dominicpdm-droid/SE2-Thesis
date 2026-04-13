@@ -163,7 +163,7 @@ export const CameraProvider = ({ children }) => {
           ),
         }));
 
-      console.log("ROI PAYLOAD FOR ROOM:", roomId, roiPayload);
+      // console.log("ROI PAYLOAD FOR ROOM:", roomId, roiPayload);
     } catch (error) {
       console.error("Failed to fetch ROI for room:", roomId, error);
       return;
@@ -207,9 +207,9 @@ export const CameraProvider = ({ children }) => {
               formData.append("roomId", String(roomId));
               formData.append("rois", JSON.stringify(roiPayload));
 
-              for (const pair of formData.entries()) {
-                console.log("FORMDATA:", pair[0], pair[1]);
-              }
+              // for (const pair of formData.entries()) {
+              //   console.log("FORMDATA:", pair[0], pair[1]);
+              // }
 
               try {
                 const data = await detectFrame(formData);
@@ -223,7 +223,7 @@ export const CameraProvider = ({ children }) => {
           );
         }, 3000);
 
-        console.log("Frame capture started for room:", roomId);
+        // console.log("Frame capture started for room:", roomId);
       })
       .catch((err) => {
         console.error("Error playing hidden video for room:", roomId, err);

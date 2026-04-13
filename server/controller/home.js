@@ -44,7 +44,7 @@ const getPeopleCount = async (req, res) => {
 
 const detectRoomFrame = async (req, res) => {
   try {
-    console.log("===== FRAME DETAILS  =====");
+    // console.log("===== FRAME DETAILS  =====");
 
     const { roomId } = req.body;
     const rois = req.body.rois ? JSON.parse(req.body.rois) : [];
@@ -57,10 +57,10 @@ const detectRoomFrame = async (req, res) => {
       return res.status(400).json({ error: "No image file uploaded" });
     }
 
-    console.log(" - Room ID:", roomId);
-    console.log(" - Name:", req.file.originalname);
-    console.log(" - Type:", req.file.mimetype);
-    console.dir(rois, { depth: null });
+    // console.log(" - Room ID:", roomId);
+    // console.log(" - Name:", req.file.originalname);
+    // console.log(" - Type:", req.file.mimetype);
+    // console.dir(rois, { depth: null });
 
     return res.status(200).json({
       message: "Frame received successfully",

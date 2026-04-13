@@ -6,6 +6,11 @@ const activitySchema = mongoose.Schema({
         ref: 'Room',
         required: true
     },
+    activity_author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     activity_timestamp: {
         type: Date,
         default: Date.now
@@ -14,10 +19,7 @@ const activitySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    camera_frame: {
-        type: String
-    }
 });
 
-const activity = mongoose.model('Activity', activitySchema);
-module.exports = activity;
+const Activity = mongoose.model('Activity', activitySchema);
+module.exports = Activity;

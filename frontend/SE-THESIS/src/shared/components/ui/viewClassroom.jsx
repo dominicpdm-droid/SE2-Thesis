@@ -22,6 +22,7 @@ import {
   getROIPoints,
   deleteROIPoints,
 } from "../../services/pointService";
+import { recordActivity } from "../../services/activityService";
 
 function PaperComponent(props) {
   const nodeRef = useRef(null);
@@ -667,21 +668,35 @@ export default function ViewClassroom({
     }
   };
 
-  const toggleLights = () => {
+  const toggleLights = async () => {
     const newState = !lightsOn;
     setLightsOn(newState);
     setDeviceState(roomId, newState, fansOn);
     const action = newState ? "turned_on" : "turned_off";
     addActivity(roomName, action, "lights");
+
+    const res = await recordActivity({
+      room_id: roomId,
+      activity_message: `${roomName} fans ${newState ? "turned on" : "turned off"}`,
+    });
+    
     toast.success(newState ? "Lights turned on" : "Lights turned off");
   };
 
-  const toggleFans = () => {
+  const toggleFans = async () => {
     const newState = !fansOn;
     setFansOn(newState);
     setDeviceState(roomId, lightsOn, newState);
     const action = newState ? "turned_on" : "turned_off";
     addActivity(roomName, action, "fans");
+
+    const res = await recordActivity({
+      room_id: roomId,
+      activity_message: `${roomName} fans ${newState ? "turned on" : "turned off"}`,
+    });
+
+    console.log("Activity logged:", res);
+
     toast.success(newState ? "Fans turned on" : "Fans turned off");
   };
 

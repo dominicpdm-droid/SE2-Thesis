@@ -41,10 +41,13 @@ const OrganizationRouter = require("./Routes/organization");
 const PointRouter = require("./Routes/points");
 const SubjectRouter = require("./Routes/subject");
 const ScheduleRouter = require("./Routes/schedule");
+const ActivityRouter = require("./Routes/activity");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+app.use("/activity", ActivityRouter);
 
 app.use("/server/home", HomeRouter);
 

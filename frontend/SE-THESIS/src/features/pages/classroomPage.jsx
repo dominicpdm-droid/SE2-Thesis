@@ -256,7 +256,7 @@ export default function ClassroomPage() {
                   Apply to an organization first
                 </p>
                 <button
-                  onClick={() => { setAnchorEl(null); navigate("/applyOrg"); }}
+                  onClick={() => { setAnchorEl(null); navigate("/iris/profile"); }}
                   className="w-full bg-[#A1A2A6] text-subtitle text-[#E4E3E1] shadow-outside-dropshadow py-4 rounded-3xl hover:scale-105 transition-all duration-150"
                 >
                   Go to Apply Organization
