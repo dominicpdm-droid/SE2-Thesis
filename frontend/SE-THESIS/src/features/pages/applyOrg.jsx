@@ -32,7 +32,7 @@ export default function ApplyOrg() {
     }
     if (!selectedOrgName) return;
     try {
-      await updateOrganization(selectedOrgName);
+      await updateOrganization(selectedOrgName, new Date());
       toast.success("Organization applied successfully!");
     } catch (error) {
       console.error("Error applying organization:", error);
@@ -73,9 +73,9 @@ export default function ApplyOrg() {
         <input
           type="text"
           placeholder="Search organizations..."
-          className="w-full h-9 px-4 py-1 text-base border border-[#d4d3d1] rounded-full shadow-inner focus:outline-none focus:border-[#858585] bg-[#E4E3E1]"
+          className="w-full h-9 px-4 py-1 text-base border border-[#d4d3d1] rounded-full shadow-inside-dropshadow-small focus:outline-none focus:border-[#858585] bg-[#E4E3E1]"
         />
-        <div className="flex-1 bg-[#E4E3E1] border border-[#d4d3d1] rounded-xl shadow-inner overflow-y-auto">
+        <div className="flex-1 bg-[#E4E3E1] border border-[#d4d3d1] rounded-xl shadow-inside-dropshadow-small overflow-y-auto">
           {organizations.map((org) => (
             <div
               key={org._id}

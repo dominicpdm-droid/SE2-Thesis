@@ -11,8 +11,6 @@ const TAB_COMPONENTS = {
   logout: Logout,
 };
 
-
-
 export default function ProfilePage() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("personal");

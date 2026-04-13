@@ -127,7 +127,7 @@ exports.loginUser = async (req, res) => {
 exports.userData = async (req, res, next) => {
   try {
     const user = await User.findById(req.userID).select(
-      "first_name last_name is_authorized is_firsttime user_organization is_admin",
+      "first_name last_name email is_authorized is_firsttime user_organization is_admin applied_at",
     );
     logger.info({
       message: `AUTH USERDATA -- ${user.first_name} data requested from frontend: Accepted`,
@@ -152,7 +152,7 @@ exports.userData = async (req, res, next) => {
 exports.isFirstTime = async (req, res, next) => {
   try {
     const user = await User.findById(req.userID).select(
-      "first_name is_firsttime",
+      "first_name is_firsttime email",
     );
     logger.info({
       message: `AUTH FIRSTLOGIN -- ${user.first_name} checked: is_firsttime = ${user.is_firsttime}`,
@@ -176,15 +176,21 @@ exports.isFirstTime = async (req, res, next) => {
 
 exports.updateOrganization = async (req, res) => {
   try {
-    const { user_organization } = req.body;
+    const { user_organization, applied_at } = req.body;
+    const updateData = { user_organization };
+    
+    if (applied_at) {
+      updateData.applied_at = new Date(applied_at);
+    }
+    
     const user = await User.findByIdAndUpdate(
       req.userID,
-      { user_organization },
+      updateData,
       { new: true }
-    ).select("first_name user_organization");
+    ).select("first_name user_organization applied_at");
 
     logger.info({
-      message: `AUTH UPDATE ORG -- ${user.first_name} updated organization to ${user_organization}`,
+      message: `AUTH UPDATE ORG -- ${user.first_name} updated organization to ${user_organization} at ${applied_at || 'unknown time'}`,
       method: req.method,
       ip: req.ip,
     });
