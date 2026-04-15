@@ -1,7 +1,7 @@
 // frontend/SE-THESIS/src/features/pages/developmentPage.jsx
 import { useEffect, useRef, useState } from "react";
 import { getRooms } from "../../shared/services/roomService";
-import { getROIPoints } from "../../shared/services/pointService";
+import {   } from "../../shared/services/pointService";
 
 
 export default function DevelopmentPage() {
