@@ -4,19 +4,19 @@ const userSchema = new mongoose.Schema({
   first_name: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   last_name: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
     lowercase: true,
-    trim: true
+    trim: true,
   },
   hashed_password: {
     type: String,
@@ -31,16 +31,16 @@ const userSchema = new mongoose.Schema({
     default: false,
   },
   user_organization: {
-    type: String,
-    default: ""
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Organization",
   },
   applied_at: {
     type: Date,
-    default: null
+    default: null,
   },
   is_firsttime: {
     type: Boolean,
-    default: true
+    default: true,
   },
   time_created: {
     type: Date,
