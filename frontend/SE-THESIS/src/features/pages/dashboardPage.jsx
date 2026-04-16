@@ -13,16 +13,20 @@ import { getDevice } from "../../shared/services/deviceService.js";
 export default function dashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showGuide, setShowGuide] = useState(false);
-  const { rooms } = useRooms();
+  const { rooms, setRooms } = useRooms();
   const { activities } = useActivity();
   const { user } = useAuth();
-  const emptyRooms = rooms.filter((room) => room.room_occupants > 0).length;
-  const vacantRoom = rooms.filter((room) => room.room_occupants === 0).length;
+  const [emptyRooms, setEmptyRooms] = useState(0);
+  const [vacantRoom, setVacantRoom] = useState(0);
   const { startCamera, startFrameCapture, initializeRoomCamera } = useCamera();
   const [availableCameras, setAvailableCameras] = useState([]);
 
   // Check if user is authorized and admin
   const canViewActivities = user?.is_authorized && user?.is_admin;
+
+  useEffect(() => {
+    console.log("DASHBOARD ROOMS UPDATED:", rooms);
+  }, [rooms]);
 
   // Filter activities to only show those from rooms in the same organization
   const filteredActivities = canViewActivities
@@ -34,6 +38,13 @@ export default function dashboard() {
 
   // Get 5 most recent activities
   const recentActivities = filteredActivities.slice(0, 5);
+
+  useEffect(() => {
+    setEmptyRooms(rooms.filter((room) => (room.people_count ?? 0) > 0).length);
+    setVacantRoom(
+      rooms.filter((room) => (room.people_count ?? 0) === 0).length,
+    );
+  }, [rooms]);
 
   const renderActivityMessage = (activity) => {
     // Handle old message format for backward compatibility
@@ -157,7 +168,7 @@ export default function dashboard() {
         console.error("Error initializing room cameras:", err);
       }
     }
-    
+
     socket.on("deviceAdded", initializeAllRoomCameras);
     initializeAllRoomCameras();
   }, [rooms, availableCameras]);

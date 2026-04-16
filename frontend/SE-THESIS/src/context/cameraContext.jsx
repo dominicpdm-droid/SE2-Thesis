@@ -228,11 +228,11 @@ export const CameraProvider = ({ children }) => {
 
               try {
                 const data = await detectFrame(formData);
-                console.log("BACKEND RESPONSE:", data);
-                console.log("OCCUPANCY:", data.features?.estimated_occupancy);
-                console.log("BELIEF:", data.belief);
-                console.log("FEATURES", data.features);
-                console.log("STATE", data.state);
+                // console.log("BACKEND RESPONSE:", data);
+                // console.log("OCCUPANCY:", data.features?.estimated_occupancy);
+                // console.log("BELIEF:", data.belief);
+                // console.log("FEATURES", data.features);
+                // console.log("STATE", data.state);
               } catch (error) {
                 console.error("Error sending frame for room:", roomId, error);
               }

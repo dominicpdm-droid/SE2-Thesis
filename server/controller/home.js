@@ -1,7 +1,8 @@
 // server/controller/home.js
 const axios = require("axios");
 const path = require("path");
-
+const Room = require("../models/room_model");
+const { getIO } = require("../config/socket");
 
 const imagePath = path.join(__dirname, "../images/sample2.jpg");
 
@@ -77,16 +78,34 @@ const detectRoomFrame = async (req, res) => {
       formData,
       {
         headers: formData.getHeaders(),
-      }
+      },
     );
 
-    // Return actual inference result
-    return res.status(200).json(response.data);
+    const peopleCount = response.data.features?.estimated_occupancy ?? 0;
 
+    console.log("Estimated Occupancy for room", room_id, ":", peopleCount);
+
+    const room = await Room.findById(room_id);
+
+    console.log("Updating room", room_id, "with occupancy:", peopleCount);
+
+    await Room.findByIdAndUpdate(room_id, { room_occupants: peopleCount });
+
+    const io = getIO();
+    io.emit("roomUpdated", {
+      roomId: room_id,
+      people_count: peopleCount,
+    });
+
+    // Return actual inference result
+    return res.status(200).json({
+      room_id,
+      ...response.data,
+    });
   } catch (error) {
     console.error(
       "Error in detectRoomFrame:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
 
     return res.status(500).json({
