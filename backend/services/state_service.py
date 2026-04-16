@@ -15,9 +15,11 @@ class RoomState:
         self.current_state = "Empty"
         self.state_duration = 0.0
 
-room_states = {}
+ROOM_STATES = {}
 
-def get_room_state(room_id: str) -> RoomState:
-    if room_id not in room_states:
-        room_states[room_id] = RoomState()
-    return room_states[room_id]
+def get_room_state(room_id):
+    if room_id not in ROOM_STATES:
+        ROOM_STATES[room_id] = RoomState()
+        ROOM_STATES[room_id].room_id = room_id 
+
+    return ROOM_STATES[room_id]

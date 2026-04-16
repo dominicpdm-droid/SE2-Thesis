@@ -208,3 +208,8 @@
 {"ip":"::1","level":"error","message":"ORGANIZATION MEMBERS -- organization is not defined","method":"GET","timestamp":"2026-04-14 23:19:15"}
 {"ip":"::1","level":"error","message":"ORGANIZATION MEMBERS -- organization is not defined","method":"GET","timestamp":"2026-04-14 23:19:18"}
 >>>>>>> 5f9b3cc2d807dca69aa1e905b0b29abebf62c588
+{"ip":"::1","level":"error","message":"AUTH UPDATE ORG -- Cast to ObjectId failed for value \"Pambayang Dalubhasaan ng Marilao\" (type string) at path \"user_organization\" because of \"BSONError\" with status code (500)","method":"PATCH","timestamp":"2026-04-15 23:42:54"}
+{"ip":"::1","level":"error","message":"AUTH UPDATE ORG -- Cast to ObjectId failed for value \"Pambayang Dalubhasaan ng Marilao\" (type string) at path \"user_organization\" because of \"BSONError\" with status code (500)","method":"PATCH","timestamp":"2026-04-15 23:43:01"}
+{"ip":"::1","level":"error","message":"AUTH UPDATE ORG -- Cast to ObjectId failed for value \"Pambayang Dalubhasaan ng Marilao\" (type string) at path \"user_organization\" because of \"BSONError\" with status code (500)","method":"PATCH","timestamp":"2026-04-15 23:43:12"}
+{"ip":"::1","level":"error","message":"AUTH UPDATE ORG -- Cast to ObjectId failed for value \"Pambayang Dalubhasaan ng Marilao\" (type string) at path \"user_organization\" because of \"BSONError\" with status code (500)","method":"PATCH","timestamp":"2026-04-15 23:43:22"}
+{"ip":"::1","level":"error","message":"ROOM CREATE -- Attempted to create a room with an existing name","method":"POST","timestamp":"2026-04-15 23:46:17"}
