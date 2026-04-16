@@ -208,3 +208,5 @@
 {"ip":"::1","level":"error","message":"ORGANIZATION MEMBERS -- organization is not defined","method":"GET","timestamp":"2026-04-14 23:19:15"}
 {"ip":"::1","level":"error","message":"ORGANIZATION MEMBERS -- organization is not defined","method":"GET","timestamp":"2026-04-14 23:19:18"}
 >>>>>>> 5f9b3cc2d807dca69aa1e905b0b29abebf62c588
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- User hard@gmail.com password do not match with status code (400)","method":"POST","timestamp":"2026-04-16 16:51:23"}
+{"ip":"::1","level":"error","message":"CLASSROOM REQUEST APPROVE -- Room validation failed: room_owner: Path `room_owner` is required.","method":"POST","timestamp":"2026-04-16 16:51:39"}

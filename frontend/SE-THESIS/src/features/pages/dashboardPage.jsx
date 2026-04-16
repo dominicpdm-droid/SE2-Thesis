@@ -22,7 +22,7 @@ export default function dashboard() {
   const [availableCameras, setAvailableCameras] = useState([]);
 
   // Check if user is authorized and admin
-  const canViewActivities = user?.is_authorized && user?.is_admin;
+  const canViewActivities = user?.is_authorized || user?.is_admin;
 
   // Filter activities to only show those from rooms in the same organization
   const filteredActivities = canViewActivities
@@ -252,30 +252,32 @@ export default function dashboard() {
               {vacantRoom}
             </div>
           </div>
-          {canViewActivities && (
-            <div className="flex flex-col w-full h-61 items-start gap-4 pad-4 primary-text">
-              <h2 className="text-title">Activity History</h2>
-              <div className="w-full h-full rounded-2xl shadow-outside-dropshadow overflow-y-auto p-4 flex flex-col gap-3 pr-6 activity-scroll">
-                {recentActivities.length === 0 ? (
-                  <p className="text-subtitle text-[#999] font-light">
-                    No activities yet
-                  </p>
-                ) : (
-                  recentActivities.map((activity) => (
-                    <div
-                      key={activity.id}
-                      className="flex flex-row items-center gap-3 pb-3 border-b border-gray-300 last:border-b-0"
-                    >
-                      <p className="bg-[#A7A7A4] w-7 aspect-square rounded-full text-center text-[#E4E3E1] font-bold text-lg">
-                        !
-                      </p>
-                      <p>{renderActivityMessage(activity)}</p>
-                    </div>
-                  ))
-                )}
-              </div>
+          <div className="flex flex-col w-full h-47 items-start gap-4 pad-4 primary-text">
+            <h2 className="text-title">Activity History</h2>
+            <div className="w-full h-61 rounded-2xl shadow-outside-dropshadow overflow-y-auto p-4 flex flex-col gap-3 pr-6 activity-scroll">
+              {!canViewActivities ? (
+                <p className="w-full h-full flex items-center justify-center text-subtitle text-[#999] font-light">
+                  You don't have permission to view activities
+                </p>
+              ) : recentActivities.length === 0 ? (
+                <p className="w-full h-full flex items-center justify-center text-subtitle text-[#999] font-light">
+                  No activities yet
+                </p>
+              ) : (
+                recentActivities.map((activity) => (
+                  <div
+                    key={activity.id}
+                    className="flex flex-row items-center gap-3 pb-3 border-b border-gray-300 last:border-b-0"
+                  >
+                    <p className="bg-[#A7A7A4] w-7 aspect-square rounded-full text-center text-[#E4E3E1] font-bold text-lg">
+                      !
+                    </p>
+                    <p>{renderActivityMessage(activity)}</p>
+                  </div>
+                ))
+              )}
             </div>
-          )}
+          </div>
         </div>
 
         <div className="relative w-full h-full flex flex-col gap-4">
