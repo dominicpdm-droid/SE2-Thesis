@@ -27,9 +27,11 @@ async def detect(
         return {"error": "Invalid image"}
     
     exit_points_parsed = None
-    if exit_points and exit_points != "[]":
+    if exit_points and exit_points.strip() not in ["", "[]"]:
         try:
             points = json.loads(exit_points)
+        except Exception:
+            return {"error": "Invalid exit points format"}
             
             exit_points_parsed = build_exit_zones(points)
         except json.JSONDecodeError:

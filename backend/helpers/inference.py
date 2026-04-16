@@ -1,12 +1,14 @@
 # helpers/inference.py
 
+from datetime import datetime
+
 # -------------------------------
 # HSMM PARAMETERS (TUNABLE)
 # -------------------------------
 EXPECTED_DURATION = {
-    "Occupied": 20.0,   # seconds (people stay longer)
-    "Leaving": 6.0,     # short transition
-    "Empty": 15.0       # empty persists
+    "Occupied": 20.0,
+    "Leaving": 6.0,
+    "Empty": 15.0
 }
 
 MIN_DURATION = {
@@ -28,27 +30,25 @@ def normalize(d):
 
 # -------------------------------
 # HSMM: Duration Model
-# Penalizes switching too early
 # -------------------------------
 def duration_factor(state, duration):
     expected = EXPECTED_DURATION[state]
     minimum = MIN_DURATION[state]
 
     if duration < minimum:
-        return 0.2  # strongly resist switching
+        return 0.2
     elif duration < expected:
         return 0.6
     else:
-        return 1.0  # free to transition
+        return 1.0
 
 
 # -------------------------------
-# TRANSITION MODEL (HSMM-aware)
+# TRANSITION MODEL
 # -------------------------------
 def state_transition(prev, current_state, duration, dt):
     alpha = min(dt, 3.0)
 
-    # Apply duration penalty to leaving current state
     stay_bias = duration_factor(current_state, duration)
 
     transition = {
@@ -57,13 +57,11 @@ def state_transition(prev, current_state, duration, dt):
             0.15 * alpha * prev["Leaving"] +
             0.05 * alpha * prev["Empty"]
         ),
-
         "Leaving": (
             0.25 * alpha * prev["Occupied"] +
             (1 - 0.35 * alpha) * prev["Leaving"] +
             0.10 * alpha * prev["Empty"]
         ),
-
         "Empty": (
             0.30 * alpha * prev["Occupied"] +
             0.35 * alpha * prev["Leaving"] +
@@ -71,7 +69,6 @@ def state_transition(prev, current_state, duration, dt):
         )
     }
 
-    # Apply duration constraint:
     for state in transition:
         if state != current_state:
             transition[state] *= stay_bias
@@ -80,7 +77,7 @@ def state_transition(prev, current_state, duration, dt):
 
 
 # -------------------------------
-# HISTORY ENHANCEMENT (same idea, refined)
+# HISTORY ENHANCEMENT
 # -------------------------------
 def enhance_with_history(obs, history):
     if len(history) < 3:
@@ -106,7 +103,7 @@ def enhance_with_history(obs, history):
 
 
 # -------------------------------
-# OBSERVATION MODEL (refined)
+# OBSERVATION MODEL
 # -------------------------------
 def observation_likelihood(obs):
     people = obs.get("estimated_occupancy", obs["people_count"])
@@ -116,28 +113,22 @@ def observation_likelihood(obs):
     presence_strength = obs.get("presence_strength", 0)
     empty_consistency = obs.get("empty_consistency", 0)
 
-    # OCCUPIED
     occ = 0.2
     if people > 0:
         occ = 0.7 + 0.3 * presence_strength
 
-    # LEAVING
     lea = 0.0
     if exit_act:
         lea += 0.6
     if trend_leaving:
         lea += 0.4
-    # prevent false leaving if no one inside
     if people == 0:
         lea = 0.0
 
-    # EMPTY
     if people > 0:
-        # Someone is inside → cannot be empty
         occ = 0.8
         emp = 0.01
     else:
-        # Only now we consider empty
         if motion < 0.1 and not exit_act:
             emp = 0.7 + 0.3 * empty_consistency
         else:
@@ -151,9 +142,69 @@ def observation_likelihood(obs):
 
 
 # -------------------------------
+# SCHEDULE → BIAS
+# -------------------------------
+def compute_schedule_bias(schedule, current_time=None):
+    if not schedule:
+        return None
+
+    if current_time is None:
+        current_time = datetime.now()
+
+    current_day = current_time.strftime("%A").lower()
+    schedule_day = schedule["day"].lower()
+
+    if current_day != schedule_day:
+        return None
+
+    start = datetime.strptime(schedule["time_start"], "%H:%M").time()
+    end = datetime.strptime(schedule["time_end"], "%H:%M").time()
+    now = current_time.time()
+
+    if start <= now <= end:
+        return {
+            "Occupied": 1.5,
+            "Leaving": 0.9,
+            "Empty": 0.6
+        }
+    else:
+        return {
+            "Occupied": 0.6,
+            "Leaving": 0.9,
+            "Empty": 1.4
+        }
+
+
+# -------------------------------
+# APPLY SCHEDULE SAFELY
+# -------------------------------
+def apply_schedule_bias(updated, obs, schedule_bias):
+    if not schedule_bias:
+        return updated
+
+    people = obs.get("estimated_occupancy", obs["people_count"])
+    biased = {}
+
+    for state in updated:
+        bias = schedule_bias.get(state, 1.0)
+
+        # 🚨 Safety rules
+        if people == 0:
+            if state == "Occupied":
+                bias = min(bias, 0.8)
+        else:
+            if state == "Occupied":
+                bias = max(bias, 1.0)
+
+        biased[state] = updated[state] * bias
+
+    return biased
+
+
+# -------------------------------
 # HSMM BELIEF UPDATE
 # -------------------------------
-def update_belief(prev_belief, obs, history, dt, room_state):
+def update_belief(prev_belief, obs, history, dt, room_state, schedule=None):
     obs = enhance_with_history(obs, history)
 
     current_state = room_state.current_state
@@ -173,11 +224,15 @@ def update_belief(prev_belief, obs, history, dt, room_state):
         for k in prev_belief
     }
 
+    # 🔥 Schedule Bias Injection
+    schedule_bias = compute_schedule_bias(schedule)
+    updated = apply_schedule_bias(updated, obs, schedule_bias)
+
     return normalize(updated)
 
 
 # -------------------------------
-# FINAL STATE + DURATION TRACKING
+# FINAL STATE
 # -------------------------------
 def infer_state(belief, room_state, dt):
     new_state = max(belief, key=belief.get)

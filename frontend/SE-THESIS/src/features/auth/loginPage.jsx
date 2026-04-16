@@ -12,7 +12,7 @@ import { socket } from "../../shared/services/socketService.js";
 import { useRooms } from "../../context/roomContext.jsx";
 // !Services
 import { validateUserEmail } from "../../shared/services/authService.js";
-import { sendOTP, verifyOTP, resetPassword } from "../../shared/services/forgotPasswordService.js";
+// import { sendOTP, verifyOTP, resetPassword } from "../../shared/services/passwordResetService.js";
 // !Assets
 import { CircleAlert } from "lucide-react";
 import { toast } from "sonner";

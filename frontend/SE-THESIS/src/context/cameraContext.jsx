@@ -1,3 +1,4 @@
+// frontend/SE-THESIS/src/context/cameraContext.jsx
 import { createContext, useContext, useRef, useEffect } from "react";
 import { detectFrame } from "../shared/services/roomService.js";
 import { getROIPoints } from "../shared/services/pointService.js";
@@ -13,8 +14,8 @@ export const CameraProvider = ({ children }) => {
   const captureResourcesRef = useRef({});
 
   useEffect(() => {
-    startCamera();
-    startFrameCapture();
+    // startCamera();
+    // startFrameCapture();
     getROIPoints();
     initializeRoomCamera();
   }, []);
@@ -122,6 +123,10 @@ export const CameraProvider = ({ children }) => {
 
   //! Frame capture
   const startFrameCapture = async (roomId) => {
+    if (!roomId) {
+      console.error("INVALID ROOM ID: ", roomId);
+      return;
+    }
     const stream = streamsRef.current[roomId];
 
     if (!stream) {
@@ -204,8 +209,18 @@ export const CameraProvider = ({ children }) => {
 
               const formData = new FormData();
               formData.append("file", blob, "frame.jpg");
-              formData.append("roomId", String(roomId));
-              formData.append("rois", JSON.stringify(roiPayload));
+              formData.append("room_id", String(roomId));
+              
+              const backendPoints = roiPayload.flatMap((roi) =>
+                roi.points.map((p) => ({
+                  point_x: p.point_x,
+                  point_y: p.point_y,
+                  point_index: roi.roi_index,
+                  point_order: p.point_order,
+                }))
+              );
+
+              formData.append("exit_points", JSON.stringify(backendPoints));
 
               // for (const pair of formData.entries()) {
               //   console.log("FORMDATA:", pair[0], pair[1]);
@@ -213,8 +228,11 @@ export const CameraProvider = ({ children }) => {
 
               try {
                 const data = await detectFrame(formData);
-                console.log("Frame detection response for room", roomId, data);
                 // console.log("BACKEND RESPONSE:", data);
+                // console.log("OCCUPANCY:", data.features?.estimated_occupancy);
+                // console.log("BELIEF:", data.belief);
+                // console.log("FEATURES", data.features);
+                // console.log("STATE", data.state);
               } catch (error) {
                 console.error("Error sending frame for room:", roomId, error);
               }

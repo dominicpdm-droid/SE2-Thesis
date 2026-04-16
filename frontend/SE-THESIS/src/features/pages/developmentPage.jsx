@@ -1,35 +1,53 @@
 // frontend/SE-THESIS/src/features/pages/developmentPage.jsx
+
 import { useEffect, useRef, useState } from "react";
 import { getRooms } from "../../shared/services/roomService";
-import {   } from "../../shared/services/pointService";
-
+import { getROIPoints } from "../../shared/services/pointService";
+import { getSchedulesByRoom } from "../../shared/services/scheduleService";
 
 export default function DevelopmentPage() {
+  // -------------------------------
+  // Refs (persistent across renders)
+  // -------------------------------
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const intervalRef = useRef(null);
-  const pointsRef = useRef({});
 
+  const pointsRef = useRef({});
+  const schedulesRef = useRef({});
+
+  // -------------------------------
+  // State Management
+  // -------------------------------
   const [rooms, setRooms] = useState([]);
   const [roomResults, setRoomResults] = useState({});
   const [frame, setFrame] = useState(null);
-  const [points, setPoints] = useState({});
 
-  // 1. FETCH ROOMS FROM SERVER
+  const [points, setPoints] = useState({});
+  const [schedules, setSchedules] = useState({});
+
+  // =========================================================
+  // 1. FETCH ROOMS
+  // =========================================================
   useEffect(() => {
     const fetchRooms = async () => {
       try {
         const data = await getRooms();
-        console.log("DATA GATHERED FOR DEVELOPMENT:", data);
+
+        console.log("[DEV] Rooms fetched:", data);
+
         setRooms(data);
       } catch (err) {
-        console.error(err);
+        console.error("[ERROR] Failed to fetch rooms:", err);
       }
     };
 
     fetchRooms();
   }, []);
 
+  // =========================================================
+  // 2. FETCH EXIT POINTS (ROI)
+  // =========================================================
   useEffect(() => {
     const fetchPoints = async () => {
       try {
@@ -39,16 +57,16 @@ export default function DevelopmentPage() {
 
             const rawPoints = data.points || data;
 
-            const cleanedPoints = rawPoints.map(p => ({
+            const cleanedPoints = rawPoints.map((p) => ({
               x: p.point_x,
               y: p.point_y,
               roi: p.point_index,
-              order: p.point_order
+              order: p.point_order,
             }));
 
             return {
               roomId: room._id,
-              data: cleanedPoints
+              data: cleanedPoints,
             };
           })
         );
@@ -58,12 +76,11 @@ export default function DevelopmentPage() {
           formatted[roomId] = data;
         });
 
-        console.log("POINTS SET ONCE:", formatted);
+        console.log("[DEV] Exit points initialized:", formatted);
 
         setPoints(formatted);
-
       } catch (err) {
-        console.error(err);
+        console.error("[ERROR] Failed to fetch exit points:", err);
       }
     };
 
@@ -72,11 +89,82 @@ export default function DevelopmentPage() {
     }
   }, [rooms]);
 
+  // =========================================================
+  // 3. FETCH SCHEDULES PER ROOM
+  // =========================================================
+  useEffect(() => {
+    const fetchSchedules = async () => {
+      try {
+        const results = await Promise.all(
+          rooms.map(async (room) => {
+            const data = await getSchedulesByRoom(room._id);
+
+            return {
+              roomId: room._id,
+              data: data || [],
+            };
+          })
+        );
+
+        const formatted = {};
+        results.forEach(({ roomId, data }) => {
+          formatted[roomId] = data;
+        });
+
+        console.log("[DEV] Schedules loaded:", formatted);
+
+        setSchedules(formatted);
+      } catch (err) {
+        console.error("[ERROR] Failed to fetch schedules:", err);
+      }
+    };
+
+    if (rooms.length > 0 && Object.keys(schedules).length === 0) {
+      fetchSchedules();
+    }
+  }, [rooms]);
+
+  // =========================================================
+  // Sync refs (avoid stale closures in interval loop)
+  // =========================================================
   useEffect(() => {
     pointsRef.current = points;
   }, [points]);
 
-  // 2. CAMERA + DETECTION LOOP
+  useEffect(() => {
+    schedulesRef.current = schedules;
+  }, [schedules]);
+
+  // =========================================================
+  // 4. HELPER: DETERMINE ACTIVE SCHEDULE
+  // =========================================================
+  const getActiveSchedule = (roomSchedules) => {
+    if (!roomSchedules || roomSchedules.length === 0) return null;
+
+    const now = new Date();
+    const currentDay = now.toLocaleString("en-US", { weekday: "long" });
+
+    return (
+      roomSchedules.find((sched) => {
+        if (sched.day !== currentDay) return false;
+
+        const [startH, startM] = sched.time_start.split(":").map(Number);
+        const [endH, endM] = sched.time_end.split(":").map(Number);
+
+        const start = new Date();
+        start.setHours(startH, startM, 0);
+
+        const end = new Date();
+        end.setHours(endH, endM, 0);
+
+        return now >= start && now <= end;
+      }) || null
+    );
+  };
+
+  // =========================================================
+  // 5. CAMERA INITIALIZATION + DETECTION LOOP
+  // =========================================================
   useEffect(() => {
     let stream;
 
@@ -90,79 +178,119 @@ export default function DevelopmentPage() {
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
         }
+
+        console.log("[DEV] Camera initialized");
       } catch (err) {
-        console.error("Camera error:", err);
+        console.error("[ERROR] Camera access failed:", err);
       }
     };
 
-    let isProcessing = false; // Flag to prevent overlapping captures
+    let isProcessing = false;
+
     const captureFrame = () => {
-    if (isProcessing) return;
-    isProcessing = true;
+      if (isProcessing) return;
+      isProcessing = true;
 
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
+      const video = videoRef.current;
+      const canvas = canvasRef.current;
 
-    if (!video || !canvas || rooms.length === 0) {
-      isProcessing = false;
-      return;
-    }
-
-    const ctx = canvas.getContext("2d");
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    canvas.toBlob(async (blob) => {
-      if (!blob) {
+      if (!video || !canvas || rooms.length === 0) {
         isProcessing = false;
         return;
       }
 
-      try {
-        await Promise.all(
-          rooms.map(async (room) => {
-            const formData = new FormData();
-            formData.append("file", blob, "frame.jpg");
-            formData.append("room_id", room._id);
+      const ctx = canvas.getContext("2d");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
 
-            const roomPoints = pointsRef.current?.[room._id] ?? [];
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            console.log("ROOM:", room._id);
-            console.log("POINTS FOUND:", roomPoints);
+      canvas.toBlob(async (blob) => {
+        if (!blob) {
+          isProcessing = false;
+          return;
+        }
 
-            const backendPoints = roomPoints.map(p => ({
-              point_x: p.x,
-              point_y: p.y,
-              point_index: p.roi,
-              point_order: p.order
-            }));
+        try {
+          await Promise.all(
+            rooms.map(async (room) => {
+              const formData = new FormData();
+              formData.append("file", blob, "frame.jpg");
+              formData.append("room_id", room._id);
 
-            formData.append("exit_points", JSON.stringify(backendPoints));
+              // -------------------------------
+              // Exit Points Handling
+              // -------------------------------
+              const roomPoints = pointsRef.current?.[room._id] ?? [];
 
-            return fetch("http://localhost:8000/detect", {
-              method: "POST",
-              body: formData,
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                setFrame(data.image_url);
+              const backendPoints = roomPoints.map((p) => ({
+                point_x: p.x,
+                point_y: p.y,
+                point_index: p.roi,
+                point_order: p.order,
+              }));
 
-                setRoomResults((prev) => ({
-                  ...prev,
-                  [room._id]: data,
-                }));
+              formData.append("exit_points", JSON.stringify(backendPoints));
+
+              // -------------------------------
+              // Schedule Handling
+              // -------------------------------
+              const roomSchedules =
+                schedulesRef.current?.[room._id] ?? [];
+
+              const activeSchedule =
+                getActiveSchedule(roomSchedules);
+
+              formData.append(
+                "schedule",
+                activeSchedule
+                  ? JSON.stringify(activeSchedule)
+                  : ""
+              );
+
+              // -------------------------------
+              // Logging (Frontend Debug)
+              // -------------------------------
+              console.log("[FRAME SEND]", {
+                room: room.room_name,
+                activeSchedule,
+                points: backendPoints.length,
               });
-          })
-        );
-      } catch (error) {
-        console.error("Error sending frames:", error);
-      } finally {
-        isProcessing = false; // ✅ NOW correct
-      }
-    }, "image/jpeg", 0.8);
-  };
+
+              return fetch("http://localhost:8000/detect", {
+                method: "POST",
+                body: formData,
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  // -------------------------------
+                  // Logging response (important)
+                  // -------------------------------
+                  console.log("[FRAME RESULT]", {
+                    room: room.room_name,
+                    state: data.state,
+                    occupancy: data.features?.estimated_occupancy,
+                    belief: data.belief,
+                  });
+
+                  // console.log("Full response:", data);
+
+                  setFrame(data.image_url);
+
+                  setRoomResults((prev) => ({
+                    ...prev,
+                    [room._id]: data,
+                  }));
+                });
+            })
+          );
+        } catch (error) {
+          console.error("[ERROR] Frame processing failed:", error);
+        } finally {
+          isProcessing = false;
+        }
+      }, "image/jpeg", 0.8);
+    };
 
     startCamera();
 
@@ -170,19 +298,22 @@ export default function DevelopmentPage() {
       clearInterval(intervalRef.current);
     }
 
-    intervalRef.current = setInterval(captureFrame, 3000); // every 3 sec
+    intervalRef.current = setInterval(captureFrame, 3000);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
-      if (stream) stream.getTracks().forEach((track) => track.stop());
+      if (stream) stream.getTracks().forEach((t) => t.stop());
     };
-  }, [rooms, points]); // rerun when rooms are loaded
+  }, [rooms, points]);
 
+  // =========================================================
+  // UI RENDER
+  // =========================================================
   return (
     <div className="w-full h-full flex flex-col items-center gap-6 p-6">
       <h1 className="text-2xl font-bold">Development Page</h1>
 
-      {/* CAMERA */}
+      {/* Camera Feed */}
       <div className="flex flex-row items-start gap-6">
         <video
           ref={videoRef}
@@ -192,11 +323,12 @@ export default function DevelopmentPage() {
         />
         <img
           src={frame}
-          alt="Placeholder"
+          alt="Processed"
           className="rounded-xl shadow-lg w-[400px]"
         />
       </div>
-      {/* RESULTS PER ROOM */}
+
+      {/* Room Results */}
       <div className="grid grid-cols-3 gap-4 w-full">
         {rooms.map((room) => {
           const result = roomResults[room._id];
@@ -207,29 +339,43 @@ export default function DevelopmentPage() {
               key={room._id}
               className="p-4 bg-gray-100 rounded-xl shadow-md"
             >
-              <h2 className="font-bold text-lg">{room.room_name}</h2>
+              <h2 className="font-bold text-lg">
+                {room.room_name}
+              </h2>
 
               {result ? (
                 <>
                   <p>State: {result.state}</p>
                   <p>People: {result.features?.people_count}</p>
-                  <p>Motion: {result.features?.motion_level?.toFixed(2)}</p>
-                  <p>Occupancy: {result.features?.estimated_occupancy}</p>
+                  <p>
+                    Motion:{" "}
+                    {result.features?.motion_level?.toFixed(2)}
+                  </p>
+                  <p>
+                    Occupancy:{" "}
+                    {result.features?.estimated_occupancy}
+                  </p>
                 </>
               ) : (
-                <p className="text-gray-500">Waiting for data...</p>
+                <p className="text-gray-500">
+                  Waiting for data...
+                </p>
               )}
-              {roomPoints && roomPoints.length > 0 ? (
+
+              {/* ROI Points */}
+              {roomPoints.length > 0 ? (
                 <div className="mt-2 text-sm">
-                  <p className="font-semibold">Points:</p>                 
-                    {roomPoints.map((p, i) => (
-                      <p key={i} className="text-xs">
-                        ({p.x}, {p.y}) [ROI {p.roi}]
-                      </p>
-                    ))}
+                  <p className="font-semibold">Points:</p>
+                  {roomPoints.map((p, i) => (
+                    <p key={i} className="text-xs">
+                      ({p.x}, {p.y}) [ROI {p.roi}]
+                    </p>
+                  ))}
                 </div>
               ) : (
-                <p className="text-gray-400 text-sm">No points yet</p>
+                <p className="text-gray-400 text-sm">
+                  No points yet
+                </p>
               )}
             </div>
           );

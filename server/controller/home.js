@@ -1,5 +1,8 @@
+// server/controller/home.js
 const axios = require("axios");
 const path = require("path");
+const Room = require("../models/room_model");
+const { getIO } = require("../config/socket");
 
 const imagePath = path.join(__dirname, "../images/sample2.jpg");
 
@@ -44,32 +47,71 @@ const getPeopleCount = async (req, res) => {
 
 const detectRoomFrame = async (req, res) => {
   try {
-    // console.log("===== FRAME DETAILS  =====");
+    // console.log("BODY:", req.body);
+    // console.log("FILE:", req.file);
+    const room_id = req.body.room_id;
+    const exit_points = req.body.exit_points;
 
-    const { roomId } = req.body;
-    const rois = req.body.rois ? JSON.parse(req.body.rois) : [];
-
-    if (!roomId) {
-      return res.status(400).json({ error: "roomId is required" });
+    if (!room_id) {
+      return res.status(400).json({ error: "room_id is required" });
     }
 
     if (!req.file) {
       return res.status(400).json({ error: "No image file uploaded" });
     }
 
-    // console.log(" - Room ID:", roomId);
-    // console.log(" - Name:", req.file.originalname);
-    // console.log(" - Type:", req.file.mimetype);
-    // console.dir(rois, { depth: null });
+    // Build FormData for FastAPI
+    const FormData = require("form-data");
+    const formData = new FormData();
 
+    formData.append("file", req.file.buffer, {
+      filename: "frame.jpg",
+      contentType: req.file.mimetype,
+    });
+
+    formData.append("room_id", room_id);
+    formData.append("exit_points", exit_points || "[]");
+
+    // Send to FastAPI
+    const response = await axios.post(
+      "http://localhost:8000/detect",
+      formData,
+      {
+        headers: formData.getHeaders(),
+      },
+    );
+
+    const peopleCount = response.data.features?.estimated_occupancy ?? 0;
+
+    console.log("Estimated Occupancy for room", room_id, ":", peopleCount);
+
+    const room = await Room.findById(room_id);
+
+    console.log("Updating room", room_id, "with occupancy:", peopleCount);
+
+    await Room.findByIdAndUpdate(room_id, { room_occupants: peopleCount });
+
+    const io = getIO();
+    io.emit("roomUpdated", {
+      roomId: room_id,
+      people_count: peopleCount,
+    });
+
+    // Return actual inference result
     return res.status(200).json({
-      message: "Frame received successfully",
-      roomId,
-      rois,
+      room_id,
+      ...response.data,
     });
   } catch (error) {
-    console.error("Error receiving frame:", error.message);
-    return res.status(500).json({ error: "Failed to receive frame" });
+    console.error(
+      "Error in detectRoomFrame:",
+      error.response?.data || error.message,
+    );
+
+    return res.status(500).json({
+      error: "Failed to process frame",
+      details: error.response?.data,
+    });
   }
 };
 
