@@ -5450,3 +5450,122 @@
 {"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69e048048f2b17f239baeae5'),\n  room_name: 'Room 12',\n  room_owner: {\n    _id: new ObjectId('69de6269a7f63ab585e92952'),\n    first_name: 'Triztan Dale'\n  },\n  room_occupants: 1,\n  room_organization: '69e047f58f2b17f239baead5',\n  room_specification: 'First floor',\n  __v: 0\n}","timestamp":"2026-04-16 22:59:58"}
 {"ip":"::1","level":"info","message":"ROI ADD -- ROI points added for room 69e048048f2b17f239baeae5: With status code 201","method":"POST","timestamp":"2026-04-16 23:00:43"}
 {"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-16 23:02:18"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:11:57"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:12:03"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:12:12"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:12:23"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:12:36"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:12:36"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:12:36"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:14:05"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:14:21"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:14:26"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:14:34"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:14:34"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:14:34"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:14:46"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:14:46"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:14:46"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:18:09"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:18:22"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:18:29"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:18:43"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:18:47"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:20:14"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:20:26"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:20:26"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:20:26"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:21:54"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:21:54"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:21:54"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:22:00"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:22:00"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:22:00"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:22:44"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:22:44"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:22:44"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:24:30"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:24:30"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:24:30"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:25:11"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:25:11"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:25:11"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:27:49"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:28:48"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:28:54"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:28:59"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:29:24"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:29:35"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:29:35"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:29:35"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:29:54"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:29:54"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:29:54"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email hard@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-18 01:30:07"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:30:07"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:30:07"}
+{"ip":"::1","level":"info","message":"ORGANIZATION MEMBERS -- Fetched 1 members for organization: Kampon ni jimmy","method":"GET","timestamp":"2026-04-18 01:30:07"}
+{"ip":"::1","level":"info","message":"NOTIFICATIONS -- Fetched 0 notifications for organization: 69e24f1fdfcd4906209407fd","method":"GET","timestamp":"2026-04-18 01:30:08"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:32:40"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:33:21"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:33:45"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:34:01"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:34:14"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:34:14"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:34:14"}
+{"ip":"::1","level":"info","message":"ORGANIZATION MEMBERS -- Fetched 1 members for organization: Kampon ni jimmy","method":"GET","timestamp":"2026-04-18 01:34:46"}
+{"ip":"::1","level":"info","message":"NOTIFICATIONS -- Fetched 0 notifications for organization: 69e24f1fdfcd4906209407fd","method":"GET","timestamp":"2026-04-18 01:34:46"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:34:53"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:34:53"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:34:53"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:37:02"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:37:18"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:37:24"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:37:31"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:37:54"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:38:06"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:38:27"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:38:40"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:38:54"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:38:55"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:38:55"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:40:51"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:40:59"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:41:17"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:41:32"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:41:51"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:41:58"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:41:58"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:41:58"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:42:17"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:42:17"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:42:17"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:44:27"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:44:50"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:45:05"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:45:10"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:45:20"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:45:31"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:45:48"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:46:01"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:46:11"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:46:11"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:46:11"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:46:30"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:46:35"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:46:35"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:46:35"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email hard@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-18 01:46:45"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:46:45"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:46:45"}
+{"ip":"::1","level":"info","message":"ORGANIZATION MEMBERS -- Fetched 1 members for organization: Kampon ni jimmy","method":"GET","timestamp":"2026-04-18 01:46:45"}
+{"ip":"::1","level":"info","message":"NOTIFICATIONS -- Fetched 0 notifications for organization: 69e24f1fdfcd4906209407fd","method":"GET","timestamp":"2026-04-18 01:46:45"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:47:08"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:47:08"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:47:08"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:50:39"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:50:48"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-18 01:52:33"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Jack data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-18 01:52:54"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 0 subjects fetched","method":"GET","timestamp":"2026-04-18 01:52:54"}
+{"level":"info","message":"ROOMS FETCHED -- ","timestamp":"2026-04-18 01:52:55"}
