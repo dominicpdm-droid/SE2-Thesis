@@ -5416,3 +5416,37 @@
 {"ip":"::1","level":"info","message":"ORGANIZATION MEMBERS -- Fetched 2 members for organization: Stardust Crusader","method":"GET","timestamp":"2026-04-16 17:41:09"}
 {"ip":"::1","level":"info","message":"NOTIFICATIONS -- Fetched 1 notifications for organization: 69de6294a7f63ab585e9295b","method":"GET","timestamp":"2026-04-16 17:41:09"}
 {"ip":"::1","level":"info","message":"ACTIVITY FETCHED -- Activities for room 69df9d36247365fa1e90411f fetched successfully","method":"GET","timestamp":"2026-04-16 17:41:09"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-16 22:13:14"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-16 22:13:22"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-16 22:13:24"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-16 22:13:30"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"AUTH USERDATA -- Triztan Dale data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-16 22:13:30"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69e048048f2b17f239baeae5'),\n  room_name: 'Room 12',\n  room_owner: {\n    _id: new ObjectId('69de6269a7f63ab585e92952'),\n    first_name: 'Triztan Dale'\n  },\n  room_occupants: 1,\n  room_organization: '69e047f58f2b17f239baead5',\n  room_specification: 'First floor',\n  __v: 0\n}","timestamp":"2026-04-16 22:13:30"}
+{"ip":"::1","level":"info","message":"ORGANIZATION MEMBERS -- Fetched 1 members for organization: sdad","method":"GET","timestamp":"2026-04-16 22:13:30"}
+{"ip":"::1","level":"info","message":"NOTIFICATIONS -- Fetched 0 notifications for organization: 69e047f58f2b17f239baead5","method":"GET","timestamp":"2026-04-16 22:13:30"}
+{"ip":"::1","level":"info","message":"ACTIVITY FETCHED -- Activities for room 69e048048f2b17f239baeae5 fetched successfully","method":"GET","timestamp":"2026-04-16 22:13:36"}
+{"ip":"::1","level":"info","message":"PENDING APPLICATIONS -- Fetched 0 pending applications for organization: 69e047f58f2b17f239baead5","method":"GET","timestamp":"2026-04-16 22:13:37"}
+{"ip":"::1","level":"info","message":"PENDING CLASSROOM REQUESTS -- Fetched 0 pending requests for organization: 69e047f58f2b17f239baead5","method":"GET","timestamp":"2026-04-16 22:13:37"}
+{"ip":"::1","level":"info","message":"NOTIFICATIONS -- Fetched 0 notifications for organization: 69e047f58f2b17f239baead5","method":"GET","timestamp":"2026-04-16 22:13:37"}
+{"ip":"::1","level":"info","message":"ORGANIZATION MEMBERS -- Fetched 1 members for organization: sdad","method":"GET","timestamp":"2026-04-16 22:13:38"}
+{"ip":"::1","level":"info","message":"PENDING CLASSROOM REQUESTS -- Fetched 0 pending requests for organization: 69e047f58f2b17f239baead5","method":"GET","timestamp":"2026-04-16 22:13:38"}
+{"ip":"::1","level":"info","message":"PENDING APPLICATIONS -- Fetched 0 pending applications for organization: 69e047f58f2b17f239baead5","method":"GET","timestamp":"2026-04-16 22:13:38"}
+{"ip":"::1","level":"info","message":"NOTIFICATIONS -- Fetched 0 notifications for organization: 69e047f58f2b17f239baead5","method":"GET","timestamp":"2026-04-16 22:13:39"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69e048048f2b17f239baeae5'),\n  room_name: 'Room 12',\n  room_owner: {\n    _id: new ObjectId('69de6269a7f63ab585e92952'),\n    first_name: 'Triztan Dale'\n  },\n  room_occupants: 1,\n  room_organization: '69e047f58f2b17f239baead5',\n  room_specification: 'First floor',\n  __v: 0\n}","timestamp":"2026-04-16 22:13:40"}
+{"ip":"::1","level":"info","message":"ORGANIZATION MEMBERS -- Fetched 1 members for organization: sdad","method":"GET","timestamp":"2026-04-16 22:13:53"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69e048048f2b17f239baeae5'),\n  room_name: 'Room 12',\n  room_owner: {\n    _id: new ObjectId('69de6269a7f63ab585e92952'),\n    first_name: 'Triztan Dale'\n  },\n  room_occupants: 1,\n  room_organization: '69e047f58f2b17f239baead5',\n  room_specification: 'First floor',\n  __v: 0\n}","timestamp":"2026-04-16 22:13:53"}
+{"ip":"::1","level":"info","message":"NOTIFICATIONS -- Fetched 0 notifications for organization: 69e047f58f2b17f239baead5","method":"GET","timestamp":"2026-04-16 22:13:53"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-16 22:59:08"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-16 22:59:09"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-16 22:59:12"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Triztan Dale data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-16 22:59:13"}
+{"ip":"::1","level":"info","message":"SUBJECTS FETCHED -- 1 subjects fetched","method":"GET","timestamp":"2026-04-16 22:59:13"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69e048048f2b17f239baeae5'),\n  room_name: 'Room 12',\n  room_owner: {\n    _id: new ObjectId('69de6269a7f63ab585e92952'),\n    first_name: 'Triztan Dale'\n  },\n  room_occupants: 1,\n  room_organization: '69e047f58f2b17f239baead5',\n  room_specification: 'First floor',\n  __v: 0\n}","timestamp":"2026-04-16 22:59:14"}
+{"ip":"::1","level":"info","message":"SERVER - Health check request","method":"GET","route":"/health","status":200,"timestamp":"2026-04-16 22:59:15"}
+{"ip":"::1","level":"info","message":"AUTH LOGIN -- Email trizxd123@gmail.com Login Succesfull","method":"POST","timestamp":"2026-04-16 22:59:57"}
+{"ip":"::1","level":"info","message":"AUTH USERDATA -- Triztan Dale data requested from frontend: Accepted","method":"GET","timestamp":"2026-04-16 22:59:57"}
+{"ip":"::1","level":"info","message":"ORGANIZATION MEMBERS -- Fetched 1 members for organization: sdad","method":"GET","timestamp":"2026-04-16 22:59:58"}
+{"ip":"::1","level":"info","message":"NOTIFICATIONS -- Fetched 0 notifications for organization: 69e047f58f2b17f239baead5","method":"GET","timestamp":"2026-04-16 22:59:58"}
+{"level":"info","message":"ROOMS FETCHED -- {\n  _id: new ObjectId('69e048048f2b17f239baeae5'),\n  room_name: 'Room 12',\n  room_owner: {\n    _id: new ObjectId('69de6269a7f63ab585e92952'),\n    first_name: 'Triztan Dale'\n  },\n  room_occupants: 1,\n  room_organization: '69e047f58f2b17f239baead5',\n  room_specification: 'First floor',\n  __v: 0\n}","timestamp":"2026-04-16 22:59:58"}
+{"ip":"::1","level":"info","message":"ROI ADD -- ROI points added for room 69e048048f2b17f239baeae5: With status code 201","method":"POST","timestamp":"2026-04-16 23:00:43"}
+{"level":"info","message":"SERVER -- Server started runnin on port: 4000","timestamp":"2026-04-16 23:02:18"}
