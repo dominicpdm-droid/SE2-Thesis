@@ -232,3 +232,5 @@
 {"ip":"::1","level":"error","message":"ROOM DELETE -- Unauthorized deletion attempt by user 69de6269a7f63ab585e92952","method":"DELETE","timestamp":"2026-04-17 23:24:57"}
 {"ip":"::1","level":"error","message":"DEVICE ADD -- User is not defined","method":"POST","timestamp":"2026-04-17 23:56:27"}
 {"ip":"::1","level":"error","message":"AUTH LOGIN -- User trizxd123@gmail.com password do not match with status code (400)","method":"POST","timestamp":"2026-04-18 00:07:10"}
+{"ip":"::1","level":"error","message":"AUTH LOGIN -- Cannot read properties of null (reading 'email') with status code (500)","method":"POST","timestamp":"2026-04-18 00:46:51"}
+{"ip":"::1","level":"error","message":"ROOM CREATE -- Attempted to create a room with an existing name","method":"POST","timestamp":"2026-04-18 00:49:57"}

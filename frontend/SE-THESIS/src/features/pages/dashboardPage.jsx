@@ -283,7 +283,38 @@ export default function dashboard() {
           <h1 className="text-title primary-text font-bold">
             Classroom Status
           </h1>
-          <div className="w-full h-full rounded-2xl shadow-outside-dropshadow"></div>
+          <div className="w-full h-full min-h-0 p-4 rounded-2xl shadow-outside-dropshadow">
+            <div className="relative w-full h-full rounded-xl shadow-inside-dropshadow-small p-4 flex flex-col gap-4">
+              {/* HEADER */}
+              <div className="grid grid-cols-4 border-b border-gray-500/60 primary-text font-medium text-title pb-2 text-center">
+                <h2>Classroom</h2>
+                <h2>Status</h2>
+                <h2>Device</h2>
+                <h2>Schedule</h2>
+              </div>
+
+              {/* CONTENT */}
+              {rooms.length === 0 ? (
+                <p className="w-full h-full flex items-center justify-center text-subtitle text-[#999] font-light">
+                  No classrooms yet
+                </p>
+              ) : (
+                rooms.map((room) => (
+                  <div
+                    key={room._id}
+                    className="grid grid-cols-4 border-b border-gray-500/60 primary-text text-subtitle py-2 text-center"
+                  >
+                    <h2>{room.room_name}</h2>
+                    <h2>{room.room_occupants >= 1 ? "Occupied" : "Vacant"}</h2>
+                    <h2>
+                      {room.room_occupants >= 1 ? "Turned On" : "Turned Off"}
+                    </h2>
+                    <h2>N/A</h2>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
         </div>
       </section>
     </div>
